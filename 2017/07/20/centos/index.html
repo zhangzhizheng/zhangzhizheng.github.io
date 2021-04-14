@@ -1,0 +1,752 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="CentOS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="第一关：设置windows启动项在安装双系统时，选择centos会默认没有windows的启动项，因此要添加windows的引导选项，过程如下：
+
+开机进入CentOS系统
+进入目录/boot/grub2，打开grub.cfg进行编辑
+找到其中第70行，在指定位置添加内容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正式入坑CentOS">
+<meta property="og:url" content="http://fenlan.github.io/2017/07/20/centos/index.html">
+<meta property="og:site_name" content="fenlan">
+<meta property="og:description" content="第一关：设置windows启动项在安装双系统时，选择centos会默认没有windows的启动项，因此要添加windows的引导选项，过程如下：
+
+开机进入CentOS系统
+进入目录/boot/grub2，打开grub.cfg进行编辑
+找到其中第70行，在指定位置添加内容">
+<meta property="og:image" content="http://fenlan.github.io/images/nginxUser.png">
+<meta property="og:image" content="http://fenlan.github.io/images/cpu.png">
+<meta property="og:updated_time" content="2017-07-19T16:36:58.507Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="正式入坑CentOS">
+<meta name="twitter:description" content="第一关：设置windows启动项在安装双系统时，选择centos会默认没有windows的启动项，因此要添加windows的引导选项，过程如下：
+
+开机进入CentOS系统
+进入目录/boot/grub2，打开grub.cfg进行编辑
+找到其中第70行，在指定位置添加内容">
+<meta name="twitter:image" content="http://fenlan.github.io/images/nginxUser.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://fenlan.github.io/2017/07/20/centos/"/>
+
+
+
+
+
+  <title>正式入坑CentOS | fenlan</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">fenlan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Everything gonna be fine in the end, if it's not fine, it's not the end.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://fenlan.github.io/2017/07/20/centos/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gao Jie">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fenlan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">正式入坑CentOS</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-20T00:36:58+08:00">
+                2017-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/07/20/centos/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/07/20/centos/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="第一关：设置windows启动项"><a href="#第一关：设置windows启动项" class="headerlink" title="第一关：设置windows启动项"></a>第一关：设置windows启动项</h2><p><strong>在安装双系统时，选择centos会默认没有windows的启动项，因此要添加windows的引导选项，过程如下：</strong></p>
+<ul>
+<li><strong>开机进入CentOS系统</strong></li>
+<li><strong>进入目录<code>/boot/grub2</code>，打开<code>grub.cfg</code>进行编辑</strong></li>
+<li><p><strong>找到其中第70行，在指定位置添加内容</strong></p>
+<a id="more"></a>
+<p><strong>添加内容如下：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### END /etc/grub.d/00 header ###</span></span><br><span class="line">menuentry <span class="string">'Windows 10'</span> &#123;</span><br><span class="line">	<span class="built_in">set</span> root=(hd0,1)</span><br><span class="line">    chainloader +1</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">### BEGIN /etc/grub.d/10_linux ###</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>重启系统，引导菜单中新增了windows 10选项</strong></p>
+</li>
+</ul>
+<h2 id="第二关：防火墙"><a href="#第二关：防火墙" class="headerlink" title="第二关：防火墙"></a>第二关：防火墙</h2><p><strong>下载防火墙服务：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]$ yum install iptables-services</span><br></pre></td></tr></table></figure></p>
+<p><strong>查看防火墙状态：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]$ nmap localhost -p 0-10000</span><br></pre></td></tr></table></figure></p>
+<p><strong>启用ssh服务：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]$ yum install openssh-server</span><br><span class="line">[root@localhost]$ chkconfig sshd on</span><br><span class="line">[root@localhost]$ service sshd restart</span><br><span class="line">[root@localhost]$ /etc/init.d/sshd start</span><br></pre></td></tr></table></figure></p>
+<p><strong>在CentOS 7之前，系统默认的防火墙为<code>iptables</code>，因此上述为<code>iptables</code>版防火墙设置，下列为<code>firewall</code>版防火墙设置，<code>firewall</code>是centOS 7系统默认的防火墙，想必也是之后的趋势。</strong><br><strong>查看<code>firewall</code>状态：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]$ systemctl status firewalld.service</span><br></pre></td></tr></table></figure></p>
+<p><strong>开启<code>firewall</code>服务（两者均可）</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]$ systemctl start firewalld.service</span><br><span class="line">[root@localhost]$ service firewalld start</span><br></pre></td></tr></table></figure></p>
+<p><strong>开启<code>ssh</code>服务：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]$ yum install openssh-service</span><br></pre></td></tr></table></figure></p>
+<p><strong>更改默认<code>ssh</code>端口：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]$ vim /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure></p>
+<p><strong>修改里面的端口为自己想要设置的端口，保存退出，由于系统默认不支持<code>ssh</code>使用22端口之外的端口，因此需要做修改：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]$ semanage port <span class="_">-a</span> -t ssh_port_t -p tcp ××××</span><br><span class="line">[root@localhost]$ semanage port <span class="_">-l</span> | grep ssh</span><br><span class="line">[root@localhost]$ systemctl restart sshd.service</span><br><span class="line">[root@localhost]$ firewall-cmd --permanent --zone=public --add-port=××××/tcp</span><br><span class="line">[root@localhost]$ firewall-cmd --reload</span><br><span class="line">[root@localhost]$ ss -tnlp | grep ssh</span><br></pre></td></tr></table></figure></p>
+<h2 id="第三关：lnmp配置"><a href="#第三关：lnmp配置" class="headerlink" title="第三关：lnmp配置"></a>第三关：lnmp配置</h2><p><strong>安装<code>nginx</code>:</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]$ yum install epel-release</span><br><span class="line">[root@localhost]$ yum -y install nginx</span><br><span class="line">[root@localhost]$ servive nginx start</span><br></pre></td></tr></table></figure></p>
+<p><strong>安装<code>php7.0</code>(CentOS 7.x):</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</span><br><span class="line">rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm</span><br><span class="line">yum install php70w php70w-opcache</span><br><span class="line">yum install php70w-fpm php70w-opcache</span><br></pre></td></tr></table></figure></p>
+<p><strong>安装php7.0不太容易，建议多在网上查</strong></p>
+<p><strong>设置<code>nginx</code>，更改root目录问题：</strong><br><strong>之前将<code>nginx</code>的root目录改了过后出现了403问题，搞了好久还是没有一个很完整的解决方案，不过找到一个方案，但还是不太理解。将<code>nginx</code>中的配置文件的<code>user nginx</code> 改为自己的用户名，即更改过后root目录的所有者。</strong><br><img src="/images/nginxUser.png" alt=""><br><strong>困惑点在于<code>nginx</code>默认的目录<code>/usr/share/nginx/html</code>的所有者为<code>root</code>但没有出现403</strong></p>
+<p><strong>安装<code>mysql</code>:</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yum install mysql</span></span><br><span class="line"><span class="comment"># yum install mysql-devel</span></span><br><span class="line"><span class="comment"># wget http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm</span></span><br><span class="line"><span class="comment"># rpm -ivh mysql-community-release-el7-5.noarch.rpm</span></span><br><span class="line"><span class="comment"># yum install mysql-community-server</span></span><br><span class="line"><span class="comment"># service mysqld restart</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="第四关：ssh登录邮件通知（后面有彩蛋哟）"><a href="#第四关：ssh登录邮件通知（后面有彩蛋哟）" class="headerlink" title="第四关：ssh登录邮件通知（后面有彩蛋哟）"></a>第四关：ssh登录邮件通知（后面有彩蛋哟）</h2><p><strong>游手好闲地折腾了几天，突发奇想，前几天租了一个vps，想随时检测有没有人通过ssh登录我的vps，如果有人登录，就发邮件通知，于是有了以下的折腾：</strong></p>
+<ul>
+<li><strong>首先安装必备的软件<code>sendmail</code> 和<code>mailx</code></strong></li>
+<li><strong>通过<code>last</code>命令和<code>awk</code>结合获取ssh登录情况</strong></li>
+<li><strong>最后写个python程序，让它一直跑着随时准备发邮件</strong></li>
+<li><strong>将写好的程序运行命令写入/etc/rc.d/rc.local，让它开机运行</strong></li>
+</ul>
+<p><strong>那么命令如下：</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost]$ yum install sendmail sendmail-cf mailx</span><br><span class="line">[root@localhost]$ service start sendmail</span><br><span class="line">[root@localhost]$ last | awk <span class="string">'$1=="root"'</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>接下来需要修改一个配置文件，让<code>sendmail</code>可以给整个英特网发送邮件，配置文件为<code>/etc/mail/sendmail.mc</code>，其中有一行</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DAEMON_OPTIONS(<span class="string">'port=smtp,Addr=127.0.0.1, Name=MTA-v6, Family=net6'</span>)dnl</span><br></pre></td></tr></table></figure></p>
+<p><strong>将127.0.0.1改为0.0.0.0，这样就可以给整个英特网发送邮件了</strong><br><strong>python脚本如下</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line"></span><br><span class="line">inst = "last | awk \'$1!=\"reboot\"\'"</span><br><span class="line">str = os.popen(inst).read()</span><br><span class="line">ssh_login = str.split("\n")</span><br><span class="line">length = len(ssh_login)</span><br><span class="line"></span><br><span class="line">while True:</span><br><span class="line">    inst1 = "last | awk \'$1!=\"reboot\"\' &gt; ssh_login.txt"</span><br><span class="line">    os.system(inst1)</span><br><span class="line">    str = os.popen(inst).read()</span><br><span class="line">    ssh_login = str.split("\n  length1 = len(ssh_login)</span><br><span class="line"></span><br><span class="line">    if length1 &gt; length:</span><br><span class="line">        login_name = ssh_login[0]</span><br><span class="line">        mail = "echo %s | mail -s \'$1!=\"reboot\"\' ××××@qq.com" % login_name</span><br><span class="line">        os.system(mail)</span><br><span class="line">        length = length1</span><br></pre></td></tr></table></figure>
+<p><strong>最重要的一点：qq邮箱发送成功一次过后vps的域名就会被拉黑，被认为是垃圾邮件，因此需要在邮箱管理界面设置域名白名单<code>localhost.localdomain</code>，然后大功告成，哈哈</strong></p>
+<p><strong>你以为这样就了事了？如果你将这个程序通过开机启动让它一直跑着，那么很开心的告诉你，你的机器cpu用不了多久就会被占满，所以，这个方法还是不行滴，这只是一种理想思路，想要处理的话可以选择指定时间运行一次或者每隔一段时间运行一次。接下来我去找个比较好的方式来实现这个功能，并实现每天发送当天的日志文件。</strong></p>
+<p><strong>我的vps跑了几个小时后的cpu受不了了，跑了不到两个小时，就被厂家限制了。</strong><br><img src="/images/cpu.png" alt=""></p>
+<h2 id="第五关：python实现邮件发送"><a href="#第五关：python实现邮件发送" class="headerlink" title="第五关：python实现邮件发送"></a>第五关：python实现邮件发送</h2><p><strong>没时间了，直接贴代码</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> email <span class="keyword">import</span> encoders</span><br><span class="line"><span class="keyword">from</span> email.header <span class="keyword">import</span> Header</span><br><span class="line"><span class="keyword">from</span> email.mime.text <span class="keyword">import</span> MIMEText</span><br><span class="line"><span class="keyword">from</span> email.utils <span class="keyword">import</span> parseaddr, formataddr</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> smtplib</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_format_addr</span><span class="params">(s)</span>:</span></span><br><span class="line">    name, addr = parseaddr(s)</span><br><span class="line">    <span class="keyword">return</span> formataddr((Header(name, <span class="string">'utf-8'</span>).encode(), addr))</span><br><span class="line"></span><br><span class="line">from_addr = <span class="string">"××××××××××@qq.com"</span></span><br><span class="line">password = <span class="string">"××××××××××"</span>　　　<span class="comment"># SMTP独立密码</span></span><br><span class="line">to_addr = <span class="string">"××××××××××@qq.com"</span></span><br><span class="line">smtp_server = <span class="string">"smtp.qq.com"</span></span><br><span class="line"></span><br><span class="line">msg = MIMEText(<span class="string">'hello, send by Python...'</span>, <span class="string">'plain'</span>, <span class="string">'utf-8'</span>)</span><br><span class="line">msg[<span class="string">'From'</span>] = _format_addr(<span class="string">'fenlan &lt;%s&gt;'</span> % from_addr)</span><br><span class="line">msg[<span class="string">'To'</span>] = _format_addr(<span class="string">'管理员 &lt;%s&gt;'</span> % to_addr)</span><br><span class="line">msg[<span class="string">'Subject'</span>] = Header(<span class="string">'vps远程登录日志'</span>, <span class="string">'utf-8'</span>).encode()</span><br><span class="line"></span><br><span class="line">server = smtplib.SMTP_SSL(smtp_server, <span class="number">465</span>)</span><br><span class="line">server.login(from_addr, password)</span><br><span class="line">server.sendmail(from_addr, [to_addr], msg.as_string())</span><br><span class="line">server.quit()</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CentOS/" rel="tag"># CentOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/21/logrotate/" rel="next" title="logrotate">
+                <i class="fa fa-chevron-left"></i> logrotate
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Gao Jie" />
+          <p class="site-author-name" itemprop="name">Gao Jie</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一关：设置windows启动项"><span class="nav-number">1.</span> <span class="nav-text">第一关：设置windows启动项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二关：防火墙"><span class="nav-number">2.</span> <span class="nav-text">第二关：防火墙</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三关：lnmp配置"><span class="nav-number">3.</span> <span class="nav-text">第三关：lnmp配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四关：ssh登录邮件通知（后面有彩蛋哟）"><span class="nav-number">4.</span> <span class="nav-text">第四关：ssh登录邮件通知（后面有彩蛋哟）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五关：python实现邮件发送"><span class="nav-number">5.</span> <span class="nav-text">第五关：python实现邮件发送</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gao Jie</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://fenlan1.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://fenlan.github.io/2017/07/20/centos/';
+          this.page.identifier = '2017/07/20/centos/';
+          this.page.title = '正式入坑CentOS';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://fenlan1.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

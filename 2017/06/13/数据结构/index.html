@@ -1,0 +1,713 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="数据结构," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1.数据结构之队列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构c++">
+<meta property="og:url" content="http://fenlan.github.io/2017/06/13/数据结构/index.html">
+<meta property="og:site_name" content="fenlan">
+<meta property="og:description" content="1.数据结构之队列">
+<meta property="og:updated_time" content="2016-07-29T14:19:11.843Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构c++">
+<meta name="twitter:description" content="1.数据结构之队列">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://fenlan.github.io/2017/06/13/数据结构/"/>
+
+
+
+
+
+  <title>数据结构c++ | fenlan</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">fenlan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Everything gonna be fine in the end, if it's not fine, it's not the end.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://fenlan.github.io/2017/06/13/数据结构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gao Jie">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fenlan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据结构c++</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-13T20:16:45+08:00">
+                2017-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/06/13/数据结构/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/06/13/数据结构/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1-数据结构之队列"><a href="#1-数据结构之队列" class="headerlink" title="1.数据结构之队列"></a>1.数据结构之队列</h3><a id="more"></a>
+<p><strong>数据结构中的队列所遵循的原则是先进先出的排队原则，即先存放的先先取出。同时队列分为普通队列和环形队列，其中普通队列是非闭合队列，效率和利用率低；相反，环形队列为首尾闭合的队列，可以实现不断取出又不断放进，效率和利用率高。</strong></p>
+<p><strong>队列有列首、列尾、列容量、列长度等名词，在此不解释了。</strong></p>
+<p><strong>接下来放代码</strong><br>Customer.h中的代码<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># ifndef CUSTOMER_H</span><br><span class="line"># define CUSTOMER_H</span><br><span class="line"></span><br><span class="line"># include &lt;<span class="built_in">string</span>&gt;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Customer</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Customer(<span class="built_in">string</span> name = <span class="string">""</span>, <span class="keyword">int</span> age = <span class="number">0</span>);</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">printInfo</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="built_in">string</span> m_strName;</span><br><span class="line">	<span class="keyword">int</span> m_iAge;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"># endif</span><br></pre></td></tr></table></figure></p>
+<p>Customer.cpp中的代码<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># include &lt;iostream&gt;</span><br><span class="line"># include <span class="string">"Customer.h"</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line">Customer::Customer(<span class="built_in">string</span> name, <span class="keyword">int</span> age)</span><br><span class="line">&#123;</span><br><span class="line">	m_strName = name;</span><br><span class="line">	m_iAge = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> Customer::printInfo() <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"姓名"</span> &lt;&lt; m_strName &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"年龄"</span> &lt;&lt; m_iAge &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>MyQueue.cpp中的代码<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"># include <span class="string">"MyQueue.h"</span></span><br><span class="line"># include &lt;iostream&gt;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line">MyQueue::MyQueue(<span class="keyword">int</span> queueCapacity)</span><br><span class="line">&#123;</span><br><span class="line">	m_iQueueCapacity = queueCapacity;</span><br><span class="line">	m_pQueue = <span class="keyword">new</span> Customer[m_iQueueCapacity];</span><br><span class="line">	ClearQueue();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyQueue::~MyQueue()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">delete</span> []m_pQueue;</span><br><span class="line">	m_pQueue = <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> MyQueue::ClearQueue()</span><br><span class="line">&#123;</span><br><span class="line">	m_iHead = <span class="number">0</span>;</span><br><span class="line">	m_iTail = <span class="number">0</span>;</span><br><span class="line">	m_iQueueLen = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> MyQueue::QueueEmpty() <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (m_iQueueLen == <span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> MyQueue::QueueLength() <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> m_iQueueLen;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> MyQueue::QueueFull() <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (m_iQueueLen == m_iQueueCapacity)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> MyQueue::EnQueue(Customer element)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (QueueFull())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		m_pQueue[m_iTail] = element;</span><br><span class="line">		m_iTail++;</span><br><span class="line">		m_iTail = m_iTail % m_iQueueCapacity;</span><br><span class="line">		m_iQueueLen++;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> MyQueue::DeQueue(Customer &amp;element)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (QueueEmpty())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		element = m_pQueue[m_iHead];</span><br><span class="line">		m_iHead++;</span><br><span class="line">		m_iHead = m_iHead % m_iQueueCapacity;</span><br><span class="line">		m_iQueueLen--;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> MyQueue::QueueTraverse()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = m_iHead; i &lt; m_iQueueLen + m_iHead; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		m_pQueue[i%m_iQueueCapacity].printInfo();</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"前面还有"</span> &lt;&lt; (i-m_iHead) &lt;&lt; <span class="string">"人"</span> &lt;&lt; <span class="built_in">endl</span>; </span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>MyQueue.h中的代码<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># ifndef MYQUEUE_H</span><br><span class="line"># define MYQUEUE_H</span><br><span class="line"></span><br><span class="line"># include <span class="string">"Customer.h"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> MyQueue</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	MyQueue(<span class="keyword">int</span> queueCapacity);         <span class="comment">//创建队列</span></span><br><span class="line">	<span class="keyword">virtual</span> ~MyQueue();                 <span class="comment">//销毁队列</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">ClearQueue</span><span class="params">()</span></span>;                  <span class="comment">//清空队列</span></span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">QueueEmpty</span><span class="params">()</span> <span class="keyword">const</span></span>;            <span class="comment">//判空队列</span></span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">QueueFull</span><span class="params">()</span> <span class="keyword">const</span></span>;             <span class="comment">//判满队列</span></span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">QueueLength</span><span class="params">()</span> <span class="keyword">const</span></span>;            <span class="comment">//队列长度</span></span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">EnQueue</span><span class="params">(Customer element)</span></span>;     <span class="comment">//新元素入队</span></span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">DeQueue</span><span class="params">(Customer &amp;element)</span></span>;    <span class="comment">//首元素出队</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">QueueTraverse</span><span class="params">()</span></span>;               <span class="comment">//遍历队列</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	Customer *m_pQueue;                     <span class="comment">//队列数组指针</span></span><br><span class="line">	<span class="keyword">int</span> m_iQueueLen;                        <span class="comment">//队列元素个数</span></span><br><span class="line">	<span class="keyword">int</span> m_iQueueCapacity;                   <span class="comment">//队列数组容量</span></span><br><span class="line">	<span class="keyword">int</span> m_iHead;</span><br><span class="line">	<span class="keyword">int</span> m_iTail;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"># endif</span><br></pre></td></tr></table></figure></p>
+<p>demo.cpp中的代码<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># include &lt;iostream&gt;</span><br><span class="line"># include &lt;stdlib.h&gt;</span><br><span class="line"># include <span class="string">"MyQueue.h"</span></span><br><span class="line"># include <span class="string">"Customer.h"</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	MyQueue *p = <span class="keyword">new</span> MyQueue(<span class="number">4</span>);</span><br><span class="line">	<span class="function">Customer <span class="title">c1</span><span class="params">(<span class="string">"张三"</span>,<span class="number">20</span>)</span></span>;</span><br><span class="line">	<span class="function">Customer <span class="title">c2</span><span class="params">(<span class="string">"李四"</span>,<span class="number">30</span>)</span></span>;</span><br><span class="line">	<span class="function">Customer <span class="title">c3</span><span class="params">(<span class="string">"王五"</span>,<span class="number">25</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">	p-&gt;EnQueue(c1);</span><br><span class="line">	p-&gt;EnQueue(c2);</span><br><span class="line">	p-&gt;EnQueue(c3);</span><br><span class="line"></span><br><span class="line">	p-&gt;QueueTraverse();</span><br><span class="line"></span><br><span class="line">	<span class="function">Customer <span class="title">c4</span><span class="params">(<span class="string">""</span>,<span class="number">0</span>)</span></span>;</span><br><span class="line">	p-&gt;DeQueue(c4);</span><br><span class="line">	c4.printInfo();</span><br><span class="line"></span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-数据结构之栈"><a href="#2-数据结构之栈" class="headerlink" title="2.数据结构之栈"></a>2.数据结构之栈</h3><p><strong>讲真，假期学习真的好难，我好不容易静下心来再学，其实之前已经学了，只是博客没做记录，今天补上。栈是很简单的模型，就是相当于一个瓶子，放东西进去，先放的在下面，后放的在上面，所以遵循后进先出原则，栈的栈底始终不变，栈顶随放入数量增加而上升。差不多就这些，今天的代码很简单，遵循我写代码不麻烦，理解容易原则</strong></p>
+<p><strong>接下来放代码</strong><br><strong>MyStack.h</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># ifndef MYSTACK_H</span><br><span class="line"># define MYSTACK_H</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> MyStack</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	MyStack(<span class="keyword">int</span> size);                       <span class="comment">//分配内存初始化栈空间，设定栈容量，栈顶</span></span><br><span class="line">	~MyStack();                              <span class="comment">//回收栈空间内存</span></span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">stackEmpty</span><span class="params">()</span></span>;                       <span class="comment">//判断栈是否为空，为空返回true,非空返回false</span></span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">stackFull</span><span class="params">()</span></span>;                        <span class="comment">//判断栈是否为满，为满返回true，非满返回false</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">clearStack</span><span class="params">()</span></span>;                       <span class="comment">//清空栈</span></span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">stackLength</span><span class="params">()</span></span>;                       <span class="comment">//已有元素个数</span></span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">push</span><span class="params">(<span class="keyword">char</span> elem)</span></span>;                    <span class="comment">//元素入栈，栈顶上升</span></span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">pop</span><span class="params">(<span class="keyword">char</span> &amp;elem)</span></span>;                    <span class="comment">//元素出栈，栈顶下降</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">stackTraverse</span><span class="params">(<span class="keyword">bool</span> isFromButtorm)</span></span>;  <span class="comment">//遍历栈中所有元素</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">char</span> *m_pBuffer;              <span class="comment">//栈空间指针</span></span><br><span class="line">	<span class="keyword">int</span> m_iSize;                  <span class="comment">//栈容量</span></span><br><span class="line">	<span class="keyword">int</span> m_iTop;                   <span class="comment">//栈顶，栈中元素个数</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"># endif</span><br></pre></td></tr></table></figure></p>
+<p><strong>MyStack.cpp</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"># include <span class="string">"MyStack.h"</span></span><br><span class="line"># include &lt;iostream&gt;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line">MyStack::MyStack(<span class="keyword">int</span> size)</span><br><span class="line">&#123;</span><br><span class="line">	m_iSize = size;</span><br><span class="line">	m_pBuffer = <span class="keyword">new</span> <span class="keyword">char</span>[size];</span><br><span class="line">	m_iTop = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyStack::~MyStack()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">delete</span> []m_pBuffer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> MyStack::stackEmpty()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="number">0</span> == m_iTop)       <span class="comment">//此处为了优秀代码，也可写成 m_iTop == 0;</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> MyStack::stackFull()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (m_iTop == m_iSize)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> MyStack::clearStack()</span><br><span class="line">&#123;</span><br><span class="line">	m_iTop = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> MyStack::stackLength()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> m_iTop;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> MyStack::push(<span class="keyword">char</span> elem)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (stackFull())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	m_pBuffer[m_iTop] = elem;</span><br><span class="line">	m_iTop++;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> MyStack::pop(<span class="keyword">char</span> &amp;elem)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (stackEmpty())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	m_iTop--;</span><br><span class="line">	elem = m_pBuffer[m_iTop];</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> MyStack::stackTraverse(<span class="keyword">bool</span> isFromButtorm)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (isFromButtorm)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m_iTop; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; m_pBuffer[i] &lt;&lt; <span class="string">","</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = m_iTop<span class="number">-1</span>; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; m_pBuffer[i] &lt;&lt; <span class="string">","</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>demo.cpp</strong><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"># include &lt;stdlib.h&gt;</span><br><span class="line"># include <span class="string">"MyStack.h"</span></span><br><span class="line"># include &lt;iostream&gt;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	MyStack *pStack = <span class="keyword">new</span> MyStack(<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">	pStack-&gt;push(<span class="string">'h'</span>);</span><br><span class="line">	pStack-&gt;push(<span class="string">'e'</span>);</span><br><span class="line">	pStack-&gt;push(<span class="string">'l'</span>);</span><br><span class="line">	pStack-&gt;push(<span class="string">'l'</span>);</span><br><span class="line">	pStack-&gt;push(<span class="string">'o'</span>);</span><br><span class="line"></span><br><span class="line">	pStack-&gt;stackTraverse(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">char</span> elem = <span class="number">0</span>;</span><br><span class="line">	pStack-&gt;pop(elem);</span><br><span class="line"></span><br><span class="line">	pStack-&gt;stackTraverse(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//pStack-&gt;clearStack();</span></span><br><span class="line"></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; pStack-&gt;stackLength() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (pStack-&gt;stackEmpty())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"栈为空"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (pStack-&gt;stackFull())</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"栈为满"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">delete</span> pStack;</span><br><span class="line">	pStack = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/13/拖更/" rel="next" title="拖更。。。。。">
+                <i class="fa fa-chevron-left"></i> 拖更。。。。。
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/13/服务器/" rel="prev" title="服务器折腾中。。。">
+                服务器折腾中。。。 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Gao Jie" />
+          <p class="site-author-name" itemprop="name">Gao Jie</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">Tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-数据结构之队列"><span class="nav-number">1.</span> <span class="nav-text">1.数据结构之队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-数据结构之栈"><span class="nav-number">2.</span> <span class="nav-text">2.数据结构之栈</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gao Jie</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://fenlan1.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://fenlan.github.io/2017/06/13/数据结构/';
+          this.page.identifier = '2017/06/13/数据结构/';
+          this.page.title = '数据结构c++';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://fenlan1.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

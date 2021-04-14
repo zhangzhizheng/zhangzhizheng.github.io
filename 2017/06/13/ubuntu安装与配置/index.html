@@ -1,0 +1,722 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ubuntu," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="想了一下，最终还是将电脑安成windows10 + ubuntu16双系统，以后多用用ubuntu试试。我选择的安装方式使用u盘安装，在安装ubuntu时一直没有选对启动盘制作工具，之前安装windows10的时候使用的是UltraIso，这个安windows没什么问题，但是安装ubuntu时，安不上，后面上网查了很多次，也用了其他的软件，比如linuxLive USB Creator,Unive">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ubuntu安装配置">
+<meta property="og:url" content="http://fenlan.github.io/2017/06/13/ubuntu安装与配置/index.html">
+<meta property="og:site_name" content="fenlan">
+<meta property="og:description" content="想了一下，最终还是将电脑安成windows10 + ubuntu16双系统，以后多用用ubuntu试试。我选择的安装方式使用u盘安装，在安装ubuntu时一直没有选对启动盘制作工具，之前安装windows10的时候使用的是UltraIso，这个安windows没什么问题，但是安装ubuntu时，安不上，后面上网查了很多次，也用了其他的软件，比如linuxLive USB Creator,Unive">
+<meta property="og:updated_time" content="2016-11-20T08:57:29.497Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ubuntu安装配置">
+<meta name="twitter:description" content="想了一下，最终还是将电脑安成windows10 + ubuntu16双系统，以后多用用ubuntu试试。我选择的安装方式使用u盘安装，在安装ubuntu时一直没有选对启动盘制作工具，之前安装windows10的时候使用的是UltraIso，这个安windows没什么问题，但是安装ubuntu时，安不上，后面上网查了很多次，也用了其他的软件，比如linuxLive USB Creator,Unive">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://fenlan.github.io/2017/06/13/ubuntu安装与配置/"/>
+
+
+
+
+
+  <title>ubuntu安装配置 | fenlan</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">fenlan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Everything gonna be fine in the end, if it's not fine, it's not the end.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://fenlan.github.io/2017/06/13/ubuntu安装与配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gao Jie">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fenlan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ubuntu安装配置</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-13T20:16:45+08:00">
+                2017-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/06/13/ubuntu安装与配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/06/13/ubuntu安装与配置/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>想了一下，最终还是将电脑安成windows10 + ubuntu16双系统，以后多用用ubuntu试试。我选择的安装方式使用u盘安装，在安装ubuntu时一直没有选对启动盘制作工具，之前安装windows10的时候使用的是UltraIso，这个安windows没什么问题，但是安装ubuntu时，安不上，后面上网查了很多次，也用了其他的软件，比如linuxLive USB Creator,Universal-USB-Installer等等，其中Universal-usb-installer还是ubuntu推荐的软件，但是仍然不行，就这我折腾了两天还是没成功，后来在qq上的一个业余群里面，有人叫我用USBwriter，结果就成功安装上了。</strong></p>
+<a id="more"></a>
+<h2 id="ubuntu有线联网"><a href="#ubuntu有线联网" class="headerlink" title="ubuntu有线联网"></a>ubuntu有线联网</h2><p><strong>感觉每一项都挺折腾的，百度google都查了很多，这一步我是在终端完成的</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pppoeconf</span><br></pre></td></tr></table></figure></p>
+<p><strong>然后根据提示输入用户名和密码就行了</strong></p>
+<h2 id="Chrome安装"><a href="#Chrome安装" class="headerlink" title="Chrome安装"></a>Chrome安装</h2><p><strong>很抱歉，我有google强迫症，没它不行，所以直接在官网下载软件包，然后再终端安装</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo dpkg -i 软件包名</span><br></pre></td></tr></table></figure></p>
+<p><strong>其实有很多安装方式，百度google多问一下就行了</strong></p>
+<h2 id="安装软件出现未满足依赖"><a href="#安装软件出现未满足依赖" class="headerlink" title="安装软件出现未满足依赖"></a>安装软件出现未满足依赖</h2><p><strong>方法就是软件更新器更新，也有这个命令</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install -f</span><br><span class="line">$ sudo apt-get update</span><br></pre></td></tr></table></figure></p>
+<p><strong>我上面的命令都不管用了，因为我下载了android studio，然后就出问题了，出现没有满足依赖，后来把android studio卸载了才能更新软件包的</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get remove android-studio</span><br></pre></td></tr></table></figure></p>
+<p><strong>系统软件包更新后仍然没有安上android studio</strong></p>
+<h2 id="安装jdk"><a href="#安装jdk" class="headerlink" title="安装jdk"></a>安装jdk</h2><p><strong>跟安装chrome一样，不过要配置环境</strong><br><strong>这里就不浪费时间，直接引用</strong><br><a href="http://blog.csdn.net/sunlovefly2012/article/details/42747929" target="_blank" rel="external">Ubuntu 11.04,14.04 下安装配置 JDK 7,JDK 8</a><br><strong>具体根据自己的情况去设置</strong></p>
+<h2 id="chrome翻墙"><a href="#chrome翻墙" class="headerlink" title="chrome翻墙"></a>chrome翻墙</h2><p><strong>这里有写得很好的博客关于翻墙的</strong><br><a href="https://aitanlu.com/ubuntu-shadowsocks-ke-hu-duan-pei-zhi.html#comment-3874" target="_blank" rel="external">linux-ubuntu使用shadowsocks客户端配置</a></p>
+<p><strong>里面全部都有，很详细。</strong></p>
+<h2 id="git安装"><a href="#git安装" class="headerlink" title="git安装"></a>git安装</h2><p><strong>这个我的博客里有，还有hexo和博客关联都有</strong></p>
+<h2 id="安装android-studio"><a href="#安装android-studio" class="headerlink" title="安装android studio"></a>安装android studio</h2><p><strong>还在努力中。。。。。</strong><br><strong>已经完成了，不过并不想写。哎，太懒了，其实也没有多难，只是要配好java环境,然后我的android studio是用命令打开，打开一个后缀是.sh的文件就行</strong></p>
+<h2 id="vim配置"><a href="#vim配置" class="headerlink" title="vim配置"></a>vim配置</h2><p><strong>主要是两个文件夹，一个是/etc/vim,一个是~/.vim,具体的还是要多google，我到现在也没弄清楚</strong></p>
+<p><strong>经过我不懈的努力，终于比较完善了，有代码高亮，自动补全，错误检测，还有nerdtree功能，这些都可以用bundle安装，先安装bundle，然后再在vimrc文件中配置Plugin + 插件，完成后重新打开vim，输入命令PluginInstall就ok。总结一下我用的vim的插件：syntastic(实现代码检测功能)、YouCompleteMe(自动补全最好的插件，没有之一，我这么觉得的)、nerdtree(可以在vim的左侧显示文件目录)，其他的我有点忘了，不过弄好这三个我已经满意了，以后试着有vim,不过讲真，vim还是不太适合写较大的程序，我这么觉得的</strong></p>
+<h2 id="gcc编译器问题"><a href="#gcc编译器问题" class="headerlink" title="gcc编译器问题"></a>gcc编译器问题</h2><p><strong>最近我自己写了一些代码，有自己定义的头文件，在ubuntu中用gcc编译器编译时总是出现许多对‘XXX’未定义的引用，我疑惑了很久，后来意外的解决了，一个原因是要编译多个源文件的程序时，所有的源文件都要放在一起编译，还有就是用math.h头文件时要在命令最后加上-lm,还有用ncurses.h头文件时也要用-lcurses,什么原因要是要google搜搜，最后吐槽一下自己，发现自己已经在c这门语言的路上越走越远，我并不想这样，感觉写什么程序都要被迫用c，我想学用python,java。然而到目前为止，我仍然对他们很陌生，好苦逼</strong></p>
+<h2 id="atom编辑器"><a href="#atom编辑器" class="headerlink" title="atom编辑器"></a>atom编辑器</h2><p><strong><a href="http://www.jianshu.com/p/b4c8479cfaa5" target="_blank" rel="external">atom</a>是一个类似sublime text的编译器，但是个人观点atom好看到无解，好用好看，是真的好。这是我强烈推荐的一款软件，不用真的会后悔，这还是寝室大神告诉我的，我偶然看见他在用，就问是什么编译器。我推荐给另一个人的时候，他居然居然说什么编译器都一样，只要能用就行。我愣了！他还在用Dev，有visual studio这样强大的东西，又有atom那么好看的东西，他居然还在用Dev。反正我是无法理解。</strong></p>
+<h2 id="主题推荐"><a href="#主题推荐" class="headerlink" title="主题推荐"></a>主题推荐</h2><p><strong>ubuntu上主题好看的不少，个人钟情与flatabulous，这个主题满足了我的个人审美，具体操作看这篇博文： <a href="http://www.jcodecraeer.com/a/chengxusheji/chengxuyuan/2015/0923/3502.html" target="_blank" rel="external">http://www.jcodecraeer.com/a/chengxusheji/chengxuyuan/2015/0923/3502.html</a></strong></p>
+<h2 id="ubuntu配置QQ"><a href="#ubuntu配置QQ" class="headerlink" title="ubuntu配置QQ"></a>ubuntu配置QQ</h2><p><strong>之前试过好多次没成功，意外之间找到了一个网站便用上了，能满足一般的QQ要求，跟windows的QQ很像，网站如下： <a href="http://ttop5.net/?p=1316" target="_blank" rel="external">http://ttop5.net/?p=1316</a></strong></p>
+<h2 id="ubuntu写markdown工具"><a href="#ubuntu写markdown工具" class="headerlink" title="ubuntu写markdown工具"></a>ubuntu写markdown工具</h2><p><strong>推荐haroopad，很好用，可以实时显示效果,推荐博文： <a href="http://www.jianshu.com/p/064aec7a5164" target="_blank" rel="external">http://www.jianshu.com/p/064aec7a5164</a></strong></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ubuntu/" rel="tag"># ubuntu</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/13/test/" rel="next" title="教训">
+                <i class="fa fa-chevron-left"></i> 教训
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/13/拖更/" rel="prev" title="拖更。。。。。">
+                拖更。。。。。 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Gao Jie" />
+          <p class="site-author-name" itemprop="name">Gao Jie</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">Tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ubuntu有线联网"><span class="nav-number">1.</span> <span class="nav-text">ubuntu有线联网</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chrome安装"><span class="nav-number">2.</span> <span class="nav-text">Chrome安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装软件出现未满足依赖"><span class="nav-number">3.</span> <span class="nav-text">安装软件出现未满足依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装jdk"><span class="nav-number">4.</span> <span class="nav-text">安装jdk</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chrome翻墙"><span class="nav-number">5.</span> <span class="nav-text">chrome翻墙</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git安装"><span class="nav-number">6.</span> <span class="nav-text">git安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装android-studio"><span class="nav-number">7.</span> <span class="nav-text">安装android studio</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vim配置"><span class="nav-number">8.</span> <span class="nav-text">vim配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gcc编译器问题"><span class="nav-number">9.</span> <span class="nav-text">gcc编译器问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#atom编辑器"><span class="nav-number">10.</span> <span class="nav-text">atom编辑器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主题推荐"><span class="nav-number">11.</span> <span class="nav-text">主题推荐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ubuntu配置QQ"><span class="nav-number">12.</span> <span class="nav-text">ubuntu配置QQ</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ubuntu写markdown工具"><span class="nav-number">13.</span> <span class="nav-text">ubuntu写markdown工具</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gao Jie</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://fenlan1.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://fenlan.github.io/2017/06/13/ubuntu安装与配置/';
+          this.page.identifier = '2017/06/13/ubuntu安装与配置/';
+          this.page.title = 'ubuntu安装配置';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://fenlan1.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>fenlan</title>
+  
+  <subtitle>Everything gonna be fine in the end, if it&#39;s not fine, it&#39;s not the end.</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://fenlan.github.io/"/>
+  <updated>2018-11-24T13:12:11.154Z</updated>
+  <id>http://fenlan.github.io/</id>
+  
+  <author>
+    <name>Gao Jie</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>决策树分类算法</title>
+    <link href="http://fenlan.github.io/2018/11/24/%E5%86%B3%E7%AD%96%E6%A0%91%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95/"/>
+    <id>http://fenlan.github.io/2018/11/24/决策树分类算法/</id>
+    <published>2018-11-24T07:18:23.000Z</published>
+    <updated>2018-11-24T13:12:11.154Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;决策树简介&quot;&gt;&lt;a href=&quot;#决策树简介&quot; class=&quot;headerlink&quot; title=&quot;决策树简介&quot;&gt;&lt;/a&gt;决策树简介&lt;/h2&gt;&lt;p&gt;机器学习中，决策树是一个预测模型；他代表的是对象属性与对象值之间的一种映射关系。树中每个节点表示某个对象，而每个分叉路径则代表某个可能的属性值，而每个叶节点则对应从根节点到该叶节点所经历的路径所表示的对象的值。决策树仅有单一输出，若欲有复数输出，可以建立独立的决策树以处理不同输出。 数据挖掘中决策树是一种经常要用到的技术，可以用于分析数据，同样也可以用来作预测。&lt;/p&gt;
+&lt;p&gt;决策树学习也是数据挖掘中一个普通的方法。在这里，每个决策树都表述了一种树型结构，它由它的分支来对该类型的对象依靠属性进行分类。每个决策树可以依靠对源数据库的分割进行数据测试。这个过程可以递归式的对树进行修剪。 当不能再进行分割或一个单独的类可以被应用于某一分支时，递归过程就完成了。&lt;/p&gt;
+&lt;p&gt;在分类算法中，决策树每个非叶节点表示一个特征属性上的测试，每个分支代表这个特征属性在某个值域上的输出，而每个叶节点存放一个类别。使用决策树进行决策的过程就是从根节点开始，测试待分类项中相应的特征属性，并按照其值选择输出分支，直到到达叶子节点，将叶子节点存放的类别作为决策结果。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="算法" scheme="http://fenlan.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="分类算法" scheme="http://fenlan.github.io/tags/%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="数据挖掘" scheme="http://fenlan.github.io/tags/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"/>
+    
+      <category term="信息熵" scheme="http://fenlan.github.io/tags/%E4%BF%A1%E6%81%AF%E7%86%B5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>朴素贝叶斯分类算法</title>
+    <link href="http://fenlan.github.io/2018/11/22/%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95/"/>
+    <id>http://fenlan.github.io/2018/11/22/贝叶斯分类算法/</id>
+    <published>2018-11-22T07:18:23.000Z</published>
+    <updated>2018-11-24T13:02:02.942Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;分类问题&quot;&gt;&lt;a href=&quot;#分类问题&quot; class=&quot;headerlink&quot; title=&quot;分类问题&quot;&gt;&lt;/a&gt;分类问题&lt;/h2&gt;&lt;p&gt;维基百科定义：分类问题是机器学习非常重要的一个组成部分，它的目标是根据已知样本的某些特征，判断一个新的样本属于哪种已知的样本类。分类问题也被称为监督式学习(supervised learning)，根据已知训练区提供的样本，通过计算选择特征参数，建立判别函数以对样本进行的分类。 与之相对的称为非监督式学习(unsupervised learning)，也叫做聚类分析。&lt;/p&gt;
+&lt;p&gt;数学定义：已知集合&lt;code&gt;C = {y1,y2,...ym}&lt;/code&gt;和&lt;code&gt;I = {x1,x2,...xn}&lt;/code&gt;，确定映射规则&lt;code&gt;y = f(x)&lt;/code&gt;，使得任意&lt;code&gt;xi ∈ I&lt;/code&gt;有且仅有一个&lt;code&gt;yi ∈ C&lt;/code&gt; ,使得&lt;code&gt;yi ∈ f(xi)&lt;/code&gt;成立。&lt;/p&gt;
+&lt;p&gt;在用户画像、NLP、预测、推荐等领域都需要研究分类问题。诸如NLP中情感分析，需要通过分类算法来分析文本的情感极性，这对于舆论监督有很好的帮助。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="算法" scheme="http://fenlan.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="分类算法" scheme="http://fenlan.github.io/tags/%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="数据挖掘" scheme="http://fenlan.github.io/tags/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98/"/>
+    
+      <category term="Elasticsearch" scheme="http://fenlan.github.io/tags/Elasticsearch/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Zookeeper Leader选举源码解析</title>
+    <link href="http://fenlan.github.io/2018/10/12/ZookeeperLeaderElection/"/>
+    <id>http://fenlan.github.io/2018/10/12/ZookeeperLeaderElection/</id>
+    <published>2018-10-12T14:52:56.724Z</published>
+    <updated>2018-04-19T12:49:54.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Zookeeper简介&quot;&gt;&lt;a href=&quot;#Zookeeper简介&quot; class=&quot;headerlink&quot; title=&quot;Zookeeper简介&quot;&gt;&lt;/a&gt;Zookeeper简介&lt;/h2&gt;&lt;p&gt;Zookeeper 是Apache Hadoop开源项目中的子项目，提供了一个分布式的协调服务框架。Zookeeper暴露了一组简单的操作原语(Primitive)集合，分布式应用能够基于这些原语实现更加高层的服务，包括同步机制、配置管理、服务器集群管理和统一命名服务等。&lt;/p&gt;
+&lt;p&gt;作为一个分布式的服务框架，Zookeeper主要解决分布式集群中应用系统的一致性问题，它采用类似文件系统目录的节点树的结构作为数据存储模型，并对已存储数据的状态变化进行维护和监控，通过监控这些数据状态的变化实现基于数据的集群管理。&lt;/p&gt;
+&lt;p&gt;Zookeeper 采用服务器集群的方式提供基本服务，服务器集群成为组，组中的成员具有两种角色，即一个唯一的领导者和若干个成员服务器，组能够为多个客户端提供服务。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="分布式计算" scheme="http://fenlan.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97/"/>
+    
+    
+      <category term="Zookeeper" scheme="http://fenlan.github.io/tags/Zookeeper/"/>
+    
+      <category term="FastLeaderElection" scheme="http://fenlan.github.io/tags/FastLeaderElection/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java volatitle</title>
+    <link href="http://fenlan.github.io/2018/05/03/JavaVolatitle/"/>
+    <id>http://fenlan.github.io/2018/05/03/JavaVolatitle/</id>
+    <published>2018-05-03T07:18:23.000Z</published>
+    <updated>2018-05-04T05:56:35.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Java-Volatile-Keyword&quot;&gt;&lt;a href=&quot;#Java-Volatile-Keyword&quot; class=&quot;headerlink&quot; title=&quot;Java Volatile Keyword&quot;&gt;&lt;/a&gt;Java Volatile Keyword&lt;/h2&gt;&lt;p&gt;Java &lt;code&gt;volatitle&lt;/code&gt;关键字用来标记变量”被存储在主存里”，更精确的说，&lt;code&gt;volatitle&lt;/code&gt;变量的每一次读取都需要从计算机的主存读取而不是&lt;code&gt;CPU Cache&lt;/code&gt;，而每一次写入都是直接写入主存，而不是&lt;code&gt;CPU Cache&lt;/code&gt;。从Java 5开始&lt;code&gt;volatitle&lt;/code&gt;关键字不仅仅是保证写入主存和从主存读取。&lt;/p&gt;
+&lt;h2 id=&quot;变量可见性问题&quot;&gt;&lt;a href=&quot;#变量可见性问题&quot; class=&quot;headerlink&quot; title=&quot;变量可见性问题&quot;&gt;&lt;/a&gt;变量可见性问题&lt;/h2&gt;&lt;p&gt;Java &lt;code&gt;volatitle&lt;/code&gt;保证了变量跨线程的可见性，这么说可能有点抽象，so let me elaborate。&lt;/p&gt;
+&lt;p&gt;在线程操作&lt;code&gt;non-volatile&lt;/code&gt;变量的多线程应用中，由于性能原因每个线程会从主存中拷贝变量到CPU Cache(each thread may copy variables from main memory into a CPU cache while working on them)。如果你的计算机是多CPU的，每个线程可能跑在不同的CPU上，这意味着每个线程会拷贝变量到不同CPU的Cache中，就像这样:&lt;br&gt;&lt;img src=&quot;http://tutorials.jenkov.com/images/java-concurrency/java-volatile-1.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Java" scheme="http://fenlan.github.io/categories/Java/"/>
+    
+    
+      <category term="Java" scheme="http://fenlan.github.io/tags/Java/"/>
+    
+      <category term="线程" scheme="http://fenlan.github.io/tags/%E7%BA%BF%E7%A8%8B/"/>
+    
+      <category term="Happens-Before" scheme="http://fenlan.github.io/tags/Happens-Before/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java Object</title>
+    <link href="http://fenlan.github.io/2018/04/28/JavaObject/"/>
+    <id>http://fenlan.github.io/2018/04/28/JavaObject/</id>
+    <published>2018-04-28T07:18:23.000Z</published>
+    <updated>2018-05-03T06:17:40.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Obejct简介&quot;&gt;&lt;a href=&quot;#Obejct简介&quot; class=&quot;headerlink&quot; title=&quot;Obejct简介&quot;&gt;&lt;/a&gt;Obejct简介&lt;/h2&gt;&lt;p&gt;Object类是Java中所有类的基类，在编译时会自动导入，位于java.lang包中，而Object中具有的属性和行为，是Java语言设计背后的思维体现。Object类中的大部分方法都是native方法，用此关键字修饰的方法是Java中的本地方法，一般是用C/C++语言来实现。&lt;/p&gt;
+&lt;h2 id=&quot;native-关键字&quot;&gt;&lt;a href=&quot;#native-关键字&quot; class=&quot;headerlink&quot; title=&quot;native 关键字&quot;&gt;&lt;/a&gt;native 关键字&lt;/h2&gt;&lt;p&gt;native是与C++联合开发的时候用的！java自己开发不用的！使用native关键字说明这个方法是原生函数，也就是这个方法是用C/C++语言实现的，并且被编译成了DLL，由java去调用。 这些函数的实现体在DLL中，JDK的源代码中并不包含，你应该是看不到的。对于不同的平台它们也是不同的。这也是java的底层机制，实际上java就是在不同的平台上调用不同的native方法实现对操作系统的访问的。native 是用做java 和其他语言（如c++）进行协作时用的 也就是native 后的函数的实现不是用java写的。native的意思就是通知操作系统， 这个函数你必须给我实现，因为我要使用。 所以native关键字的函数都是操作系统实现的， java只能调用。java是跨平台的语言，既然是跨了平台，所付出的代价就是牺牲一些对底层的控制，而java要实现对底层的控制，就需要一些其他语言的帮助，这个就是native的作用了。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Java" scheme="http://fenlan.github.io/categories/Java/"/>
+    
+    
+      <category term="Java" scheme="http://fenlan.github.io/tags/Java/"/>
+    
+      <category term="Object" scheme="http://fenlan.github.io/tags/Object/"/>
+    
+      <category term="线程" scheme="http://fenlan.github.io/tags/%E7%BA%BF%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>设计模式-桥接</title>
+    <link href="http://fenlan.github.io/2018/04/16/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E6%A1%A5%E6%8E%A5/"/>
+    <id>http://fenlan.github.io/2018/04/16/设计模式-桥接/</id>
+    <published>2018-04-16T07:18:23.000Z</published>
+    <updated>2018-04-16T07:08:02.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;概念&quot;&gt;&lt;a href=&quot;#概念&quot; class=&quot;headerlink&quot; title=&quot;概念&quot;&gt;&lt;/a&gt;概念&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;桥接模式(Bridge)&lt;/strong&gt;是用于把抽象化和实现化解耦，使得两者可以独立变化。这种类型的设计模式属于结构型模式，它通过提供抽象化和实现化的桥接结构来实现两者的解耦。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;桥接意图&lt;/strong&gt; : 将抽象部分与实现部分分离，使它们都可以独立的变化&lt;br&gt;&lt;strong&gt;主要解决&lt;/strong&gt; : 在有多种可能会变化的情况下，用继承会造成类爆炸问题，扩展起来不灵活&lt;br&gt;&lt;strong&gt;何时使用&lt;/strong&gt; : 实现系统可能有多个角度分类，每一种角度都可能变化&lt;br&gt;&lt;strong&gt;如何解决&lt;/strong&gt; : 把这种多角度分类分离出来，让它们独立变化，减少它们之间耦合&lt;br&gt;&lt;strong&gt;主要代码&lt;/strong&gt; : 抽象类依赖实现类&lt;br&gt;&lt;strong&gt;桥接优点&lt;/strong&gt; : 1、抽象和实现的分离。 2、优秀的扩展能力。 3、实现细节对客户透明&lt;br&gt;&lt;strong&gt;桥接缺点&lt;/strong&gt; : 桥接模式的引入会增加系统的理解与设计难度，由于聚合关联关系建立在抽象层，要求开发者针对抽象进行设计与编程&lt;/p&gt;
+&lt;h2 id=&quot;例子一&quot;&gt;&lt;a href=&quot;#例子一&quot; class=&quot;headerlink&quot; title=&quot;例子一&quot;&gt;&lt;/a&gt;例子一&lt;/h2&gt;&lt;p&gt;我们需要画出一个红色的圆、绿色的圆、红色的正方形、绿色的正方形。在这个例子中，有两个变化的方面，一个是形状、一个是颜色。&lt;/p&gt;
+&lt;p&gt;普通的设计是这样的 : 有一个圆类和一个正方形类实现Shape类，而圆类下面有两个子类，红色圆和绿色圆；正方形类下面有两个子类，红色正方形、绿色正方形。但是这样的设计会出现的问题是，当我需要添加一个其他变化的颜色时，诸如蓝色，那么情况会非常糟糕。我们需要在每个形状的下面重新添加一个蓝色形状的实现。这就是桥接定义的变化。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="设计模式" scheme="http://fenlan.github.io/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="桥接" scheme="http://fenlan.github.io/tags/%E6%A1%A5%E6%8E%A5/"/>
+    
+      <category term="抽象" scheme="http://fenlan.github.io/tags/%E6%8A%BD%E8%B1%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据库大杂烩</title>
+    <link href="http://fenlan.github.io/2018/04/13/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%84%E8%A6%81%E7%82%B9%E6%80%BB%E7%BB%93/"/>
+    <id>http://fenlan.github.io/2018/04/13/数据库各要点总结/</id>
+    <published>2018-04-13T07:18:23.000Z</published>
+    <updated>2018-04-14T13:21:39.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;索引&quot;&gt;&lt;a href=&quot;#索引&quot; class=&quot;headerlink&quot; title=&quot;索引&quot;&gt;&lt;/a&gt;索引&lt;/h2&gt;&lt;h3 id=&quot;顺序索引&quot;&gt;&lt;a href=&quot;#顺序索引&quot; class=&quot;headerlink&quot; title=&quot;顺序索引&quot;&gt;&lt;/a&gt;顺序索引&lt;/h3&gt;&lt;p&gt;&lt;code&gt;聚集索引&lt;/code&gt;：　如果包含记录的文件按照某个搜索码指定的顺序排序，那么该搜索码对应的索引称为聚集索引。&lt;br&gt;&lt;code&gt;非聚集索引&lt;/code&gt;：　搜索码指定的顺序与文件中记录的物理顺序不同的索引称为非聚集索引。&lt;/p&gt;
+&lt;p&gt;诸如在大学教师记录文件中，用教师ID作为搜索码，记录按照该搜索码顺序存放。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;稠密索引(dense index)&lt;/code&gt; : &lt;strong&gt;在稠密索引中，文件中的每一个搜索码值都有一个索引项&lt;/strong&gt;。在稠密聚集索引中，索引项包括搜索码值以及指向具有该搜索码的第一条数据记录的指针。具有相同搜索码值的其余记录顺序地存储在第一条数据记录之后，由于该索引是聚集索引，因此记录根据相同的搜索码值排序。而在稠密非聚集索引中，索引必须存储指向所有具有相同搜索码值的记录项的指针列表。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;稠密聚集索引具有相同搜索码值的记录按照指定顺序存储；但是稠密非聚集索引必须存储指向一个指针列表，这个列表里面有具有相同搜索码值的记录指针。聚集索引只存储第一条记录的指针，其他的按照顺序查找，非聚集索引就要记录一个指针表。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.assignmenthelp.net/assignment_help/images/dense-index-architecture.gif&quot; alt=&quot;Dense index&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="数据库" scheme="http://fenlan.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="SQL" scheme="http://fenlan.github.io/tags/SQL/"/>
+    
+      <category term="索引" scheme="http://fenlan.github.io/tags/%E7%B4%A2%E5%BC%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>GET vs POST</title>
+    <link href="http://fenlan.github.io/2018/04/13/GET_POST/"/>
+    <id>http://fenlan.github.io/2018/04/13/GET_POST/</id>
+    <published>2018-04-13T07:18:23.000Z</published>
+    <updated>2018-04-13T06:34:32.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在综合考虑下，决定复习一些Web方向的东西，以备不时之需。。。。&lt;/p&gt;
+&lt;h2 id=&quot;What-is-HTTP&quot;&gt;&lt;a href=&quot;#What-is-HTTP&quot; class=&quot;headerlink&quot; title=&quot;What is HTTP?&quot;&gt;&lt;/a&gt;What is HTTP?&lt;/h2&gt;&lt;p&gt;HTTP全称&lt;code&gt;Hypertext Transfer Protocol&lt;/code&gt;(就是中文常说的&lt;code&gt;超文本传输协议&lt;/code&gt;)，这个协议是为了客户端和服务端能进行通信。HTTP是客户端和服务端进行请求响应过程的协议，客户端发送请求，服务端响应这个请求并返回信息。通常一个web浏览器作为一个客户端，而一台提供web服务的机器作为服务端。&lt;/p&gt;
+&lt;h2 id=&quot;Two-HTTP-Request-Methods-GET-and-POST&quot;&gt;&lt;a href=&quot;#Two-HTTP-Request-Methods-GET-and-POST&quot; class=&quot;headerlink&quot; title=&quot;Two HTTP Request Methods: GET and POST&quot;&gt;&lt;/a&gt;Two HTTP Request Methods: GET and POST&lt;/h2&gt;&lt;p&gt;两个非常常用的请求响应方法 : GET and POST。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;GET&lt;/code&gt;- Requests data from a specified resource&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;POST&lt;/code&gt;- Submits data to be processed to a specified resource&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;The-GET-Method&quot;&gt;&lt;a href=&quot;#The-GET-Method&quot; class=&quot;headerlink&quot; title=&quot;The GET Method&quot;&gt;&lt;/a&gt;The GET Method&lt;/h3&gt;&lt;p&gt;GET请求方法会将请求信息放在URL中&lt;br&gt;&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;/test/demo_form.php?name1=value1&amp;amp;name2=value2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;GET其他特性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;GET请求能被缓存&lt;/li&gt;
+&lt;li&gt;GET请求会保留在浏览器的历史记录中&lt;/li&gt;
+&lt;li&gt;GET请求可以被标为书签&lt;/li&gt;
+&lt;li&gt;GET请求不应该用在处理敏感数据时候&lt;/li&gt;
+&lt;li&gt;GET请求有长度限制&lt;/li&gt;
+&lt;li&gt;GET只应该用在取回数据&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;总的来说，由于GET请求数据被放在URL中，以及它能缓存，便导致了上述的其他特性。诸如&lt;code&gt;GET请求会保留在浏览器的历史记录中&lt;/code&gt; &lt;code&gt;GET请求可以被标为书签&lt;/code&gt; &lt;code&gt;GET请求不应该用在处理敏感数据时候&lt;/code&gt;这三条就是因为GET请求会被缓存，且请求数据在URL中，又因为浏览器或者说操作系统对URL的长度有要求，所以GET请求有长度限制。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="Web" scheme="http://fenlan.github.io/categories/Web/"/>
+    
+    
+      <category term="GET" scheme="http://fenlan.github.io/tags/GET/"/>
+    
+      <category term="POST" scheme="http://fenlan.github.io/tags/POST/"/>
+    
+      <category term="HTTP" scheme="http://fenlan.github.io/tags/HTTP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java GC</title>
+    <link href="http://fenlan.github.io/2018/04/11/Java%20GC/"/>
+    <id>http://fenlan.github.io/2018/04/11/Java GC/</id>
+    <published>2018-04-11T07:18:23.000Z</published>
+    <updated>2018-04-16T07:07:58.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Java堆空间划分&quot;&gt;&lt;a href=&quot;#Java堆空间划分&quot; class=&quot;headerlink&quot; title=&quot;Java堆空间划分&quot;&gt;&lt;/a&gt;Java堆空间划分&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;/images/r_heap1.PNG&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://dl2.iteye.com/upload/attachment/0088/6262/6af6a224-8b2d-3f23-8b58-79263cfda9c4.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Java" scheme="http://fenlan.github.io/categories/Java/"/>
+    
+    
+      <category term="GC" scheme="http://fenlan.github.io/tags/GC/"/>
+    
+      <category term="Java" scheme="http://fenlan.github.io/tags/Java/"/>
+    
+      <category term="JMM" scheme="http://fenlan.github.io/tags/JMM/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++ Java基本类型size问题</title>
+    <link href="http://fenlan.github.io/2018/04/08/%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/"/>
+    <id>http://fenlan.github.io/2018/04/08/基本类型/</id>
+    <published>2018-04-08T07:18:23.000Z</published>
+    <updated>2018-04-08T08:51:06.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;鉴于之前多次面试题考察基本类型大小问题，今天来做个记录。&lt;/p&gt;
+&lt;h2 id=&quot;C&quot;&gt;&lt;a href=&quot;#C&quot; class=&quot;headerlink&quot; title=&quot;C++&quot;&gt;&lt;/a&gt;C++&lt;/h2&gt;&lt;p&gt;C++的基本类型有&lt;code&gt;bool&lt;/code&gt; &lt;code&gt;char&lt;/code&gt; &lt;code&gt;short&lt;/code&gt; &lt;code&gt;float&lt;/code&gt; &lt;code&gt;double&lt;/code&gt; &lt;code&gt;int&lt;/code&gt; &lt;code&gt;long&lt;/code&gt; &lt;code&gt;long long&lt;/code&gt; &lt;code&gt;pointer(指针)&lt;/code&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;数据类型&lt;/th&gt;
+&lt;th&gt;32位系统字节数&lt;/th&gt;
+&lt;th&gt;32系统二进制位数&lt;/th&gt;
+&lt;th&gt;64位系统字节数&lt;/th&gt;
+&lt;th&gt;64位系统二进制位数&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;bool&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;char&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;short&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;16&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;16&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;int&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;32&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;32&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;long&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;32&lt;/td&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;64&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;long long&lt;/td&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;64&lt;/td&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;64&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;float&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;32&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;32&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;double&lt;/td&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;64&lt;/td&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;64&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;pointer&lt;/td&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;32&lt;/td&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;64&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;可以看出其中只有&lt;code&gt;long&lt;/code&gt; &lt;code&gt;pointer&lt;/code&gt;是不同的，32位平台32位，64位平台64位，其实&lt;code&gt;pointer&lt;/code&gt;就是用&lt;code&gt;long&lt;/code&gt;表示的&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Java" scheme="http://fenlan.github.io/categories/Java/"/>
+    
+    
+      <category term="Java" scheme="http://fenlan.github.io/tags/Java/"/>
+    
+      <category term="C++" scheme="http://fenlan.github.io/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Kafka 简述</title>
+    <link href="http://fenlan.github.io/2018/04/02/Kafka/"/>
+    <id>http://fenlan.github.io/2018/04/02/Kafka/</id>
+    <published>2018-04-02T07:18:23.000Z</published>
+    <updated>2018-04-07T08:23:09.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;持久化&quot;&gt;&lt;a href=&quot;#持久化&quot; class=&quot;headerlink&quot; title=&quot;持久化&quot;&gt;&lt;/a&gt;持久化&lt;/h2&gt;&lt;p&gt;&lt;code&gt;Don.t fear the filesystem&lt;/code&gt;&lt;br&gt;Kafka非常依赖文件系统来存储和缓存消息，但人们在这里总是有一个错觉&lt;code&gt;disks are slow&lt;/code&gt;。事实上，&lt;code&gt;disks&lt;/code&gt;可以很慢，也可以很快，这取决于人们怎么用它，一个设计合理的磁盘结构通常可以和网络一样快。&lt;/p&gt;
+&lt;p&gt;这里有一个事实：磁盘读取快慢主要取决于寻道延时。&lt;code&gt;six 7200rpm SATA RAID-5 array&lt;/code&gt;的磁盘&lt;code&gt;linear writes&lt;/code&gt;的读取速度大概为600MB/sec，但&lt;code&gt;random writes&lt;/code&gt;的读取速度为100k/sec，正因为现在操作系统通常采用随机存储的方式，导致人们对磁盘速度产生了错觉。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;持久化策略&lt;/code&gt;&lt;br&gt;当我们保持消息队列的时候，快用完内存空间时，并不采用操作系统的策略(尽可能保持内存中的数据，将不常用的数据块替换出去)，而是将内存中的消息全部冲洗到文件系统中。个人理解Kafka能够高吞吐的原因在于&lt;code&gt;Batching&lt;/code&gt;、&lt;code&gt;larger network packets&lt;/code&gt;、&lt;code&gt;larger sequential disk operations&lt;/code&gt;、&lt;code&gt;contiguous memory block&lt;/code&gt;，所有的策略都为了保证Kafka将随机消息写转为线性写。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="分布式计算" scheme="http://fenlan.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97/"/>
+    
+    
+      <category term="Kafka" scheme="http://fenlan.github.io/tags/Kafka/"/>
+    
+      <category term="持久化" scheme="http://fenlan.github.io/tags/%E6%8C%81%E4%B9%85%E5%8C%96/"/>
+    
+      <category term="备份" scheme="http://fenlan.github.io/tags/%E5%A4%87%E4%BB%BD/"/>
+    
+      <category term="日志压缩" scheme="http://fenlan.github.io/tags/%E6%97%A5%E5%BF%97%E5%8E%8B%E7%BC%A9/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redis持久化</title>
+    <link href="http://fenlan.github.io/2018/04/01/Redis/"/>
+    <id>http://fenlan.github.io/2018/04/01/Redis/</id>
+    <published>2018-04-01T07:18:23.000Z</published>
+    <updated>2018-04-01T14:32:17.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;持久化方式&quot;&gt;&lt;a href=&quot;#持久化方式&quot; class=&quot;headerlink&quot; title=&quot;持久化方式&quot;&gt;&lt;/a&gt;持久化方式&lt;/h2&gt;&lt;h3 id=&quot;RDB持久化&quot;&gt;&lt;a href=&quot;#RDB持久化&quot; class=&quot;headerlink&quot; title=&quot;RDB持久化&quot;&gt;&lt;/a&gt;RDB持久化&lt;/h3&gt;&lt;p&gt;Redis安装后默认支持的持久化方式。在指定的时间间隔内将内存中的数据集快照写入到磁盘。在配置文件中，通常默认的配置是每900秒至少有一个key发生变化时会持久化一次; 每300秒至少有10个key发生变化时会持久化一次; 每60秒10000次变化时持久化一次&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;优点&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;RDB 是一个非常紧凑（compact）的文件，它保存了 Redis 在某个时间点上的数据集。 这种文件非常适合用于进行备份： 比如说，你可以在最近的 24 小时内，每小时备份一次 RDB 文件，并且在每个月的每一天，也备份一个 RDB 文件。 这样的话，即使遇上问题，也可以随时将数据集还原到不同的版本。&lt;/li&gt;
+&lt;li&gt;RDB 非常适用于灾难恢复（disaster recovery）：它只有一个文件，并且内容都非常紧凑，可以（在加密后）将它传送到别的数据中心，或者亚马逊 S3 中&lt;/li&gt;
+&lt;li&gt;RDB 可以最大化 Redis 的性能：父进程在保存 RDB 文件时唯一要做的就是 fork 出一个子进程，然后这个子进程就会处理接下来的所有保存工作，父进程无须执行任何磁盘 I/O 操作。&lt;/li&gt;
+&lt;li&gt;RDB 在恢复大数据集时的速度比 AOF 的恢复速度要快。&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="数据库" scheme="http://fenlan.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="redis持久化" scheme="http://fenlan.github.io/tags/redis%E6%8C%81%E4%B9%85%E5%8C%96/"/>
+    
+      <category term="redis RDB" scheme="http://fenlan.github.io/tags/redis-RDB/"/>
+    
+      <category term="redis AOF" scheme="http://fenlan.github.io/tags/redis-AOF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java 线程池</title>
+    <link href="http://fenlan.github.io/2018/03/17/Java%E7%BA%BF%E7%A8%8B%E6%B1%A0/"/>
+    <id>http://fenlan.github.io/2018/03/17/Java线程池/</id>
+    <published>2018-03-17T07:18:23.000Z</published>
+    <updated>2018-03-17T11:19:32.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;概念&quot;&gt;&lt;a href=&quot;#概念&quot; class=&quot;headerlink&quot; title=&quot;概念&quot;&gt;&lt;/a&gt;概念&lt;/h2&gt;&lt;p&gt;&lt;code&gt;Java Thread pool&lt;/code&gt; represents a group of worker threads that are waiting for the job and reuse many times.&lt;br&gt;Java中创建一个线程是一个相对耗时的操作，当程序中频繁的创建和使用线程时，会产生严重的内存管理开销(significant memory management overhead)。基于这个原因，Java有了线程池的概念，在使用线程之前，创建一个线程池。当一个任务需要一个线程去运行时，程序去线程池中选择一个空闲线程去运行。当任务结束后，线程又重新放进线程池中等待下一个任务，这样就避免了频繁的创建线程，大大节省了内存管理开销。&lt;/p&gt;
+&lt;h2 id=&quot;线程池分类&quot;&gt;&lt;a href=&quot;#线程池分类&quot; class=&quot;headerlink&quot; title=&quot;线程池分类&quot;&gt;&lt;/a&gt;线程池分类&lt;/h2&gt;&lt;p&gt;&lt;code&gt;fixed thread pool&lt;/code&gt; : 固型线程池—-创建时指定创建的线程数，当任务使用完线程池中的空闲线程，则新任务将等待被占用的线程执行完任务。&lt;/p&gt;
+&lt;p&gt;固定长度线程池的优点 : 用Web服务器举例说明，Web服务器需要单独的线程去处理一个HTTP请求，当出现大量的HTTP请求，超过了系统能够承受的范围，那么这个Web服务器就会停止响应所有的请求。而如果使用固定长度线程池，虽然不能立刻服务请求，但系统会尽最大能力去处理。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Java" scheme="http://fenlan.github.io/categories/Java/"/>
+    
+    
+      <category term="Thread" scheme="http://fenlan.github.io/tags/Thread/"/>
+    
+      <category term="线程池" scheme="http://fenlan.github.io/tags/%E7%BA%BF%E7%A8%8B%E6%B1%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JVM 小记</title>
+    <link href="http://fenlan.github.io/2018/03/12/JVM/"/>
+    <id>http://fenlan.github.io/2018/03/12/JVM/</id>
+    <published>2018-03-12T07:18:23.000Z</published>
+    <updated>2018-03-17T06:23:46.000Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;类加载机制&quot;&gt;&lt;a href=&quot;#类加载机制&quot; class=&quot;headerlink&quot; title=&quot;类加载机制&quot;&gt;&lt;/a&gt;类加载机制&lt;/h2&gt;&lt;p&gt;JVM 的类加载是通过ClassLoader 及其子类完成的，加载分为三类加载&lt;/p&gt;
+&lt;h3
+        
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="http://fenlan.github.io/categories/Java/"/>
+    
+    
+      <category term="JVM" scheme="http://fenlan.github.io/tags/JVM/"/>
+    
+      <category term="GC" scheme="http://fenlan.github.io/tags/GC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java 基础小记</title>
+    <link href="http://fenlan.github.io/2018/03/01/Java%E5%B0%8F%E8%AE%B0/"/>
+    <id>http://fenlan.github.io/2018/03/01/Java小记/</id>
+    <published>2018-03-01T07:18:23.000Z</published>
+    <updated>2018-03-09T09:58:25.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;static和final的区别和用途&quot;&gt;&lt;a href=&quot;#static和final的区别和用途&quot; class=&quot;headerlink&quot; title=&quot;static和final的区别和用途&quot;&gt;&lt;/a&gt;static和final的区别和用途&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Static&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修饰变量:静态变量随着类的加载时完成初始化，内存中只有一个，且JVM也只会为他分配一次内存，所有类共享静态变量，静态变量放在指定的静态共享区，遵循一改全改。&lt;/li&gt;
+&lt;li&gt;修饰方法:静态方法在类加载时就存在与静态区域，不依赖任何实例，Static方法必须实现，不能是抽象类abstract。使用静态方法时可以直接使用&lt;code&gt;类名.方法名&lt;/code&gt;,不需要实例化一个对象。&lt;/li&gt;
+&lt;li&gt;修饰代码块：类加载完后执行代码块中的内容。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Final&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修饰变量：&lt;ul&gt;
+&lt;li&gt;编译时常量：类加载的过程完成初始化，编译后带入到任何计算式中，只能是基本类型。&lt;/li&gt;
+&lt;li&gt;运行时常量：基本数据类型或引用数据类型，引用不可变，但引用的内容可以变。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;修饰方法：跟final单词意思相近，最后的方法，表示不能被继承，不能被子类修改重写。&lt;/li&gt;
+&lt;li&gt;修饰类：不能被继承。&lt;/li&gt;
+&lt;li&gt;修饰形参：final形参在方法内不可变。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="Java" scheme="http://fenlan.github.io/categories/Java/"/>
+    
+    
+      <category term="static" scheme="http://fenlan.github.io/tags/static/"/>
+    
+      <category term="final" scheme="http://fenlan.github.io/tags/final/"/>
+    
+      <category term="synchronized" scheme="http://fenlan.github.io/tags/synchronized/"/>
+    
+      <category term="hashCode" scheme="http://fenlan.github.io/tags/hashCode/"/>
+    
+      <category term="equals" scheme="http://fenlan.github.io/tags/equals/"/>
+    
+      <category term="Collection" scheme="http://fenlan.github.io/tags/Collection/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Storm</title>
+    <link href="http://fenlan.github.io/2018/01/31/storm/"/>
+    <id>http://fenlan.github.io/2018/01/31/storm/</id>
+    <published>2018-01-31T07:18:23.000Z</published>
+    <updated>2018-01-31T13:08:52.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;安装zookeeper&quot;&gt;&lt;a href=&quot;#安装zookeeper&quot; class=&quot;headerlink&quot; title=&quot;安装zookeeper&quot;&gt;&lt;/a&gt;安装zookeeper&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;安装过程查看文章&lt;a href=&quot;http://fenlan.github.io/2017/11/29/zookeeper-kafka/&quot;&gt;http://fenlan.github.io/2017/11/29/zookeeper-kafka/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;安装Storm&quot;&gt;&lt;a href=&quot;#安装Storm&quot; class=&quot;headerlink&quot; title=&quot;安装Storm&quot;&gt;&lt;/a&gt;安装Storm&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;官网下载Storm&lt;/li&gt;
+&lt;li&gt;配置&lt;code&gt;storm/conf/storm.yaml&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;storm.zookeeper.servers:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    - &lt;span class=&quot;string&quot;&gt;&quot;zookeeper-server1&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    - &lt;span class=&quot;string&quot;&gt;&quot;zookeeper-server2&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    - &lt;span class=&quot;string&quot;&gt;&quot;zookeeper-server3&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;nimbus.seeds: [&lt;span class=&quot;string&quot;&gt;&quot;zookeeper-server1&quot;&lt;/span&gt;]&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;storm.local.dir: &lt;span class=&quot;string&quot;&gt;&quot;/root/Downloads/storm/data&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;supervisor.slots.ports:&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    - 6700&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    - 6701&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    - 6702&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    - 6703&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="流式计算" scheme="http://fenlan.github.io/categories/%E6%B5%81%E5%BC%8F%E8%AE%A1%E7%AE%97/"/>
+    
+    
+      <category term="centos" scheme="http://fenlan.github.io/tags/centos/"/>
+    
+      <category term="storm" scheme="http://fenlan.github.io/tags/storm/"/>
+    
+      <category term="zookeeper" scheme="http://fenlan.github.io/tags/zookeeper/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>代码注入</title>
+    <link href="http://fenlan.github.io/2017/12/14/%E4%BB%A3%E7%A0%81%E6%B3%A8%E5%85%A5/"/>
+    <id>http://fenlan.github.io/2017/12/14/代码注入/</id>
+    <published>2017-12-14T07:18:23.000Z</published>
+    <updated>2017-12-22T10:15:42.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;c程序代码注入&quot;&gt;&lt;a href=&quot;#c程序代码注入&quot; class=&quot;headerlink&quot; title=&quot;c程序代码注入&quot;&gt;&lt;/a&gt;c程序代码注入&lt;/h2&gt;&lt;p&gt;c程序:&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;#include &amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;int main(int argc, char *argv[])&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	char src[100], dst[100], cmd[205] = &lt;span class=&quot;string&quot;&gt;&quot;cp &quot;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;built_in&quot;&gt;printf&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&quot;Please enter name of source file:&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	gets(src);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	strcat(cmd, src);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	strcat(cmd, &lt;span class=&quot;string&quot;&gt;&quot; &quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;built_in&quot;&gt;printf&lt;/span&gt;(&lt;span class=&quot;string&quot;&gt;&quot;Please enter name of destination file:&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	gets(dst);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	strcat(cmd, dst);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	system(cmd);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;built_in&quot;&gt;return&lt;/span&gt; 0;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="安全" scheme="http://fenlan.github.io/categories/%E5%AE%89%E5%85%A8/"/>
+    
+    
+      <category term="centos" scheme="http://fenlan.github.io/tags/centos/"/>
+    
+      <category term="代码注入" scheme="http://fenlan.github.io/tags/%E4%BB%A3%E7%A0%81%E6%B3%A8%E5%85%A5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>分享会资料</title>
+    <link href="http://fenlan.github.io/2017/12/11/%E5%88%86%E4%BA%AB%E4%BC%9A%E8%B5%84%E6%96%99/"/>
+    <id>http://fenlan.github.io/2017/12/11/分享会资料/</id>
+    <published>2017-12-11T07:18:23.000Z</published>
+    <updated>2018-01-10T12:13:15.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;ssh&quot;&gt;&lt;a href=&quot;#ssh&quot; class=&quot;headerlink&quot; title=&quot;ssh&quot;&gt;&lt;/a&gt;ssh&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;ssh服务端、客户端(ssh.config/sshd.config)端口修改&lt;/li&gt;
+&lt;li&gt;ssh公钥私钥(authorized/id_rsa/id_rsa.pub)&lt;ul&gt;
+&lt;li&gt;远程主机收到用户的登录请求，把自己的公钥发给用户&lt;/li&gt;
+&lt;li&gt;用户使用这个公钥，将登录密码加密后，发送回来&lt;/li&gt;
+&lt;li&gt;远程主机用自己的私钥，解密登录密码，如果密码正确，就同意用户登录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;ssh免密(公钥)登录&lt;ul&gt;
+&lt;li&gt;用户将自己的公钥储存在远程主机上。&lt;/li&gt;
+&lt;li&gt;登录的时候，远程主机会向用户发送一段随机字符串，用户用自己的私钥加密后，再发回来。&lt;/li&gt;
+&lt;li&gt;远程主机用事先储存的公钥进行解密，如果成功，就证明用户是可信的，直接允许登录shell，不再要求密码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+      <category term="Web服务器" scheme="http://fenlan.github.io/categories/Web%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    
+      <category term="apache" scheme="http://fenlan.github.io/tags/apache/"/>
+    
+      <category term="nginx" scheme="http://fenlan.github.io/tags/nginx/"/>
+    
+      <category term="Shadowsocks" scheme="http://fenlan.github.io/tags/Shadowsocks/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>分布式计算</title>
+    <link href="http://fenlan.github.io/2017/11/30/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97/"/>
+    <id>http://fenlan.github.io/2017/11/30/分布式计算/</id>
+    <published>2017-11-30T07:44:18.000Z</published>
+    <updated>2017-11-30T12:02:42.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;大数据知识图谱&quot;&gt;&lt;a href=&quot;#大数据知识图谱&quot; class=&quot;headerlink&quot; title=&quot;大数据知识图谱&quot;&gt;&lt;/a&gt;大数据知识图谱&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;http://angelof7.github.io/album/bigdata.gif&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="分布式计算" scheme="http://fenlan.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97/"/>
+    
+    
+      <category term="Kafka" scheme="http://fenlan.github.io/tags/Kafka/"/>
+    
+      <category term="hadoop" scheme="http://fenlan.github.io/tags/hadoop/"/>
+    
+      <category term="storm" scheme="http://fenlan.github.io/tags/storm/"/>
+    
+      <category term="spark" scheme="http://fenlan.github.io/tags/spark/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Zookeeper Kafka 安装</title>
+    <link href="http://fenlan.github.io/2017/11/29/zookeeper-kafka/"/>
+    <id>http://fenlan.github.io/2017/11/29/zookeeper-kafka/</id>
+    <published>2017-11-29T07:44:18.000Z</published>
+    <updated>2017-11-30T11:30:07.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Zookeeper-安装&quot;&gt;&lt;a href=&quot;#Zookeeper-安装&quot; class=&quot;headerlink&quot; title=&quot;Zookeeper 安装&quot;&gt;&lt;/a&gt;Zookeeper 安装&lt;/h2&gt;&lt;h3 id=&quot;下载Zookeeper&quot;&gt;&lt;a href=&quot;#下载Zookeeper&quot; class=&quot;headerlink&quot; title=&quot;下载Zookeeper&quot;&gt;&lt;/a&gt;下载Zookeeper&lt;/h3&gt;&lt;p&gt;官方下载地址&lt;a href=&quot;https://zookeeper.apache.org/releases.html&quot;&gt;https://zookeeper.apache.org/releases.html&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;环境搭建&quot;&gt;&lt;a href=&quot;#环境搭建&quot; class=&quot;headerlink&quot; title=&quot;环境搭建&quot;&gt;&lt;/a&gt;环境搭建&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;解压下载包，并将解压的目录重命名为zookeeper&lt;/li&gt;
+&lt;li&gt;将 &lt;code&gt;zookeeper/conf/zoo_sample.cfg&lt;/code&gt; 拷贝一份命名为 &lt;code&gt;zoo.cfg&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;zoo.cfg配置&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+      <category term="分布式计算" scheme="http://fenlan.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97/"/>
+    
+    
+      <category term="Kafka" scheme="http://fenlan.github.io/tags/Kafka/"/>
+    
+      <category term="Zookeeper" scheme="http://fenlan.github.io/tags/Zookeeper/"/>
+    
+  </entry>
+  
+</feed>

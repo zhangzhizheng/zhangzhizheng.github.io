@@ -1,0 +1,1256 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java,线程,Happens-Before," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="fenlan" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/wifi.png?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Java Volatile KeywordJava volatitle关键字用来标记变量”被存储在主存里”，更精确的说，volatitle变量的每一次读取都需要从计算机的主存读取而不是CPU Cache，而每一次写入都是直接写入主存，而不是CPU Cache。从Java 5开始volatitle关键字不仅仅是保证写入主存和从主存读取。
+变量可见性问题Java volatitle保证了变量跨线程的可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java volatitle">
+<meta property="og:url" content="http://fenlan.github.io/2018/05/03/JavaVolatitle/index.html">
+<meta property="og:site_name" content="fenlan">
+<meta property="og:description" content="Java Volatile KeywordJava volatitle关键字用来标记变量”被存储在主存里”，更精确的说，volatitle变量的每一次读取都需要从计算机的主存读取而不是CPU Cache，而每一次写入都是直接写入主存，而不是CPU Cache。从Java 5开始volatitle关键字不仅仅是保证写入主存和从主存读取。
+变量可见性问题Java volatitle保证了变量跨线程的可">
+<meta property="og:image" content="http://tutorials.jenkov.com/images/java-concurrency/java-volatile-1.png">
+<meta property="og:image" content="http://tutorials.jenkov.com/images/java-concurrency/java-volatile-2.png">
+<meta property="og:image" content="http://tutorials.jenkov.com/images/java-concurrency/java-volatile-3.png">
+<meta property="og:image" content="http://www.qdpma.com/SystemArchitecture_files/CPU_4c.png">
+<meta property="og:updated_time" content="2018-05-04T05:56:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java volatitle">
+<meta name="twitter:description" content="Java Volatile KeywordJava volatitle关键字用来标记变量”被存储在主存里”，更精确的说，volatitle变量的每一次读取都需要从计算机的主存读取而不是CPU Cache，而每一次写入都是直接写入主存，而不是CPU Cache。从Java 5开始volatitle关键字不仅仅是保证写入主存和从主存读取。
+变量可见性问题Java volatitle保证了变量跨线程的可">
+<meta name="twitter:image" content="http://tutorials.jenkov.com/images/java-concurrency/java-volatile-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://fenlan.github.io/2018/05/03/JavaVolatitle/"/>
+
+
+
+
+
+  <title>Java volatitle | fenlan</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">fenlan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Everything gonna be fine in the end, if it's not fine, it's not the end.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://fenlan.github.io/2018/05/03/JavaVolatitle/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gao Jie">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fenlan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java volatitle</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-03T15:18:23+08:00">
+                2018-05-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/03/JavaVolatitle/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/03/JavaVolatitle/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Java-Volatile-Keyword"><a href="#Java-Volatile-Keyword" class="headerlink" title="Java Volatile Keyword"></a>Java Volatile Keyword</h2><p>Java <code>volatitle</code>关键字用来标记变量”被存储在主存里”，更精确的说，<code>volatitle</code>变量的每一次读取都需要从计算机的主存读取而不是<code>CPU Cache</code>，而每一次写入都是直接写入主存，而不是<code>CPU Cache</code>。从Java 5开始<code>volatitle</code>关键字不仅仅是保证写入主存和从主存读取。</p>
+<h2 id="变量可见性问题"><a href="#变量可见性问题" class="headerlink" title="变量可见性问题"></a>变量可见性问题</h2><p>Java <code>volatitle</code>保证了变量跨线程的可见性，这么说可能有点抽象，so let me elaborate。</p>
+<p>在线程操作<code>non-volatile</code>变量的多线程应用中，由于性能原因每个线程会从主存中拷贝变量到CPU Cache(each thread may copy variables from main memory into a CPU cache while working on them)。如果你的计算机是多CPU的，每个线程可能跑在不同的CPU上，这意味着每个线程会拷贝变量到不同CPU的Cache中，就像这样:<br><img src="http://tutorials.jenkov.com/images/java-concurrency/java-volatile-1.png" alt=""></p>
+<a id="more"></a>
+<p>对于JVM来说，从主存读取值到CPU Cache和从CPU Cache写入数据到主存，<code>non-volatile variables</code>没有上述的保证，会引出一些问题。</p>
+<p>设想一种情况，两个或更多线程可以访问包含一个计数器变量的共享对象，声明如下:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SharedObject</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> counter = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>再想象一下，只有Thread 1 increments the <code>counter</code> variable，但是Thread 1 和Thread 2都会一遍一遍的读取<code>counter</code> 变量。如果<code>counter</code>变量没有<code>volatitle</code>修饰，那么就不保证<code>counter</code>变量的值何时从CPU Cache写入主存。这就意味着在CPU Cache中<code>counter</code>的值与主存里的值可能不一样，就像这样:<br><img src="http://tutorials.jenkov.com/images/java-concurrency/java-volatile-2.png" alt=""></p>
+<p>这个问题就是线程不能看到变量的最新值，因为在另一个线程中没有将变量最新值写入到主存中，这个问题叫做<code>可见性</code>问题。一个线程的更新对另一个线程不可见。</p>
+<h2 id="Java-volatitle可见性保证"><a href="#Java-volatitle可见性保证" class="headerlink" title="Java volatitle可见性保证"></a>Java volatitle可见性保证</h2><p>Java关键字<code>volatitle</code>旨在解决变量可见性问题。定义了<code>counter</code>变量<code>volatitle</code>后线程的写入操作会立刻写入到主存，同时所有的读取都是直接从主存读取。下面就是<code>volatitle</code>定义<code>counter</code>变量:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SharedObject</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">volatile</span> <span class="keyword">int</span> counter = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>定义了<code>volatitle</code>后就保证了变量的可见性，在上述的情况下，线程1修改<code>counter</code>，线程2读取<code>counter</code>，对于线程2来说它能够见到线程1的最新修改。但是当两个线程都要修改<code>counter</code>的时候，定义<code>volatitle</code>显然不够了。</p>
+<h2 id="Full-volatile-Visibility-Guarantee"><a href="#Full-volatile-Visibility-Guarantee" class="headerlink" title="Full volatile Visibility Guarantee"></a>Full volatile Visibility Guarantee</h2><p>Full保证如下:</p>
+<ul>
+<li>如果线程A写入一个<code>volatitle</code>变量，并且线程B随后读取相同的<code>volatitle</code>变量，则在写入<code>volatitle</code>变量之前，线程A可见的所有变量在线程B读取<code>volatitle</code>变量后也将可见。</li>
+<li>如果线程A读取一个<code>volatitle</code>变量，则读取<code>volatitle</code>变量时线程A可见的所有变量也将从主内存中重新读取。<blockquote>
+<p>可以看到，这个开销是比较恐怖的，首先直接读主存和写主存原本就很慢，慢到几十倍甚至几百倍，同时一个volatitle变量读取会带动其他所有volatitle重新读取，大大降低了性能。</p>
+</blockquote>
+</li>
+</ul>
+<p>来看一个例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> years;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> months</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span> days;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> years, <span class="keyword">int</span> months, <span class="keyword">int</span> days)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.years  = years;</span><br><span class="line">        <span class="keyword">this</span>.months = months;</span><br><span class="line">        <span class="keyword">this</span>.days   = days;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>update()</code>方法会写入三个变量，其中只有<code>days</code>是<code>volatitle</code>，Full volatitle保证意味着，当写入<code>days</code>时，所有的变量都会写入主存。在这个例子中就是，当我们要写入<code>days</code>时，<code>years</code>和<code>months</code>也要写入主存。当要读取<code>years</code>、<code>months</code>和<code>days</code>时，你可以像这样做:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> years;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> months</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span> days;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">totalDays</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> total = <span class="keyword">this</span>.days;</span><br><span class="line">        total += months * <span class="number">30</span>;</span><br><span class="line">        total += years * <span class="number">365</span>;</span><br><span class="line">        <span class="keyword">return</span> total;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> years, <span class="keyword">int</span> months, <span class="keyword">int</span> days)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.years  = years;</span><br><span class="line">        <span class="keyword">this</span>.months = months;</span><br><span class="line">        <span class="keyword">this</span>.days   = days;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注意<code>totalDays()</code>方法在开始时读取<code>days</code>到<code>total</code>变量。当读取<code>days</code>值时，<code>years</code>和<code>months</code>也会从主存中读取，因此你可以通过上面的读取步骤读到所有变量的最新值。</p>
+<h2 id="指令重排"><a href="#指令重排" class="headerlink" title="指令重排"></a>指令重排</h2><p>为了性能，Java VM和CPU是允许重排程序中的指令的，只要语义含义保持不变。举个例子，看看下面的指令：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> b = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">a++;</span><br><span class="line">b++;</span><br></pre></td></tr></table></figure></p>
+<p>在不丢失语义含义的情况下，上述指令可能被重排成下列指令序列：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">a++;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> b = <span class="number">2</span>;</span><br><span class="line">b++;</span><br></pre></td></tr></table></figure></p>
+<p>但对于<code>volatitle</code>变量来说，指令重排是一个挑战，让我们来看一下上述MyClass的例子<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> years;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> months</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span> days;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> years, <span class="keyword">int</span> months, <span class="keyword">int</span> days)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.years  = years;</span><br><span class="line">        <span class="keyword">this</span>.months = months;</span><br><span class="line">        <span class="keyword">this</span>.days   = days;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当写入<code>days</code>时，也会同时写入<code>years</code>和<code>months</code>到主存。但是如果Java VM重排指令如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> years, <span class="keyword">int</span> months, <span class="keyword">int</span> days)</span></span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.days   = days;</span><br><span class="line">    <span class="keyword">this</span>.months = months;</span><br><span class="line">    <span class="keyword">this</span>.years  = years;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当<code>days</code>修改时，<code>months</code>和<code>years</code>也会写入主存，但是这次<code>days</code>写入发生在<code>years</code>和<code>months</code>之前，因此这个新值对其他线程不可见，这个语义含义已经被改变了。</p>
+<blockquote>
+<p>特别注意，在写入时，把<code>volatitle</code>变量写入放在最后，这样当运行到<code>volatitle</code>变量写入时，会同时把其他非<code>volatitle</code>写入主存，但当<code>volatitle</code>写在最开始时，后面的非<code>volatitle</code>便不会写入最新值。读取相反，将<code>volatitle</code>读取放在最前，线程会读取所有值最新的主存值，如果放在最后面，那么前面读取的变量不是从主存直接读取的。</p>
+</blockquote>
+<h2 id="Happens-Before"><a href="#Happens-Before" class="headerlink" title="Happens-Before"></a>Happens-Before</h2><p>为了解决指令重组问题，Java <code>volatitle</code>关键字除了可见性保证，还给了一个<code>happens-before</code>保证，<code>happens-before</code>保证如下：</p>
+<ul>
+<li>如果读写发生在写入<code>volatitle</code>变量之前，那么读写其他变量的指令不能被重组到写入<code>volatitle</code>变量之后。写入<code>volatitle</code>变量之前的读写被保证<code>happens before</code>写<code>volatitle</code>变量。需要注意，写入<code>volatitle</code>变量之后的读写其他变量仍然有可能被重组到写入<code>volatitle</code>变量之前。因此<strong>From after to before is allowed, but from before to after is not allowed</strong>（<code>volatitle</code>写操作之后的指令被重组到写之前是允许的，而写操作之前的指令不允许被重组到写之后）</li>
+<li>读<code>volatitle</code>变量之后的读写操作不能被重组到<code>volatitle</code>之前，但同样注意发生在读<code>volatitle</code>之前的指令可以重组到读<code>volatitle</code>之后。因此<strong>From before to after is allowed, but from after to before is not allowed</strong>(<code>volatitle</code>读之前的指令被重组到读之后值允许的，而读操作之后的指令不允许被重组到读值前)</li>
+</ul>
+<blockquote>
+<p>Reads from and writes to other variables cannot be reordered to occur after a write to a volatile variable, if the reads / writes originally occurred before the write to the volatile variable.<br>The reads / writes before a write to a volatile variable are guaranteed to “happen before” the write to the volatile variable. Notice that it is still possible for e.g. reads / writes of other variables located after a write to a volatile to be reordered to occur before that write to the volatile. Just not the other way around. From after to before is allowed, but from before to after is not allowed</p>
+<p>Reads from and writes to other variables cannot be reordered to occur before a read of a volatile variable, if the reads / writes originally occurred after the read of the volatile variable. Notice that it is possible for reads of other variables that occur before the read of a volatile variable can be reordered to occur after the read of the volatile. Just not the other way around. From before to after is allowed, but from after to before is not allowed</p>
+</blockquote>
+<p>重点解释一下这两个保证：<br>对于<code>volatitle</code>写来说，如果写之前的指令被重组到写之后，那么当执行到<code>volatitle</code>时，最新值就不能被立刻写入主存；但写之后的指令被重组到写之前是没有影响的，因为写之后的指令最终还是要被写到主存，只是重组之后提前将新值写入主存。<br>对于<code>volatitle</code>读来说，如果读之后的指令被重组到读之前，那么指令没有获取最新值，因为只有到<code>volatitle</code>读执行时才重读所有变量的主存值，比如当<code>years</code>读取发生<code>volatitle days</code>之后，那么执行到<code>volatitle days</code>会刷新<code>years</code>的值，但<code>years</code>被重组到<code>volatitle days</code>之前，<code>years</code>的值没有刷新；相反，如果读取<code>years</code>在<code>volatitle days</code>之前，被重组到之后，它会读到最新值，这正是我们希望的结果。</p>
+<h2 id="volatile-is-Not-Always-Enough"><a href="#volatile-is-Not-Always-Enough" class="headerlink" title="volatile is Not Always Enough"></a>volatile is Not Always Enough</h2><p>当多个线程都需要对一个<code>volatitle</code>变量进行写入，且写入之前需要依赖<code>volatitle</code>之前的值，这时候就会出现竞争条件：</p>
+<p>想象一下，如果线程1读取一个<code>shared  counter</code>值到自己CPU Cache中，开始值为0，然后<code>increment</code>该值为1，但没有把改变的值写入主存；然后线程2也从主存中读取<code>counter</code>，由于线程1没有将改变的值写入主存，此时线程2读到的值为0，它也对值进行<code>increment</code>后值变为1，此时线程2也没有将值写入主存，就像这样:<br><img src="http://tutorials.jenkov.com/images/java-concurrency/java-volatile-3.png" alt=""></p>
+<p>线程1和线程2几乎不同步，而我们希望的是进行两次加操作后值为2，但线程1和线程2的CPU Cache中<code>counter</code>都是1，即使我们将它们的值写入到主存，结果仍然不对，这都是<strong>volatile is Not Always Enough</strong></p>
+<h2 id="When-is-volatile-Enough"><a href="#When-is-volatile-Enough" class="headerlink" title="When is volatile Enough?"></a>When is volatile Enough?</h2><p>既然出现了上诉情况，那么如果解决这个问题？之前<code>volatitle</code>已经明显不够，那么这时候可以使用Java另外一个关键字<code>synchronized</code>去保证读取变量和写入变量是原子性的操作。上诉的<code>volatitle</code>读写操作并不会产生线程阻塞，使用<code>synchronized</code>保证临界区读写不出现上述问题，但这样会导致线程阻塞。另外也可以使用<code>java.util.concurrent package</code>里面的<code>AtomicLong</code> or <code>AtomicReference</code>或者其他。</p>
+<p>在这样的情况下，只有一个线程允许对<code>volatitle</code>变量进行读写操作，其他线程只允许读取，这样即保证读取最新的值，也保证直接写入主存。但是光有<code>synchronized</code>并不能保证可见性。</p>
+<h2 id="性能问题"><a href="#性能问题" class="headerlink" title="性能问题"></a>性能问题</h2><p>之前已经说过，<code>volatitle</code>的读写都要直接接触主存，那么与读写CPU Cache相比，开销增大许多倍，放一张计算机各级缓存以及主存的读取速度比较:<br><img src="http://www.qdpma.com/SystemArchitecture_files/CPU_4c.png" alt=""></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="http://tutorials.jenkov.com/java-concurrency/volatile.html" target="_blank" rel="external">Java Volatile Keyword</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+          
+            <a href="/tags/线程/" rel="tag"><i class="fa fa-tag"></i> 线程</a>
+          
+            <a href="/tags/Happens-Before/" rel="tag"><i class="fa fa-tag"></i> Happens-Before</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/28/JavaObject/" rel="next" title="Java Object">
+                <i class="fa fa-chevron-left"></i> Java Object
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/12/ZookeeperLeaderElection/" rel="prev" title="Zookeeper Leader选举源码解析">
+                Zookeeper Leader选举源码解析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Gao Jie" />
+          <p class="site-author-name" itemprop="name">Gao Jie</p>
+           
+              <p class="site-description motion-element" itemprop="description">Everything gonna be fine in the end</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">72</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/fenlan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/fenlan96" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/lan.fen.104" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://github.com/fanzhonghao" title="范中豪" target="_blank">范中豪</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://23.83.230.171" title="bookshop" target="_blank">bookshop</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/fenlan/ChatTool" title="ChatTool" target="_blank">ChatTool</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/fenlan/cloudcourse-web" title="cloudcourse" target="_blank">cloudcourse</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/fenlan/storm-nginx-log" title="nginx实时日志统计" target="_blank">nginx实时日志统计</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-Volatile-Keyword"><span class="nav-number">1.</span> <span class="nav-text">Java Volatile Keyword</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量可见性问题"><span class="nav-number">2.</span> <span class="nav-text">变量可见性问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-volatitle可见性保证"><span class="nav-number">3.</span> <span class="nav-text">Java volatitle可见性保证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Full-volatile-Visibility-Guarantee"><span class="nav-number">4.</span> <span class="nav-text">Full volatile Visibility Guarantee</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指令重排"><span class="nav-number">5.</span> <span class="nav-text">指令重排</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Happens-Before"><span class="nav-number">6.</span> <span class="nav-text">Happens-Before</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile-is-Not-Always-Enough"><span class="nav-number">7.</span> <span class="nav-text">volatile is Not Always Enough</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#When-is-volatile-Enough"><span class="nav-number">8.</span> <span class="nav-text">When is volatile Enough?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能问题"><span class="nav-number">9.</span> <span class="nav-text">性能问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">10.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gao Jie</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://fenlan1.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://fenlan.github.io/2018/05/03/JavaVolatitle/';
+          this.page.identifier = '2018/05/03/JavaVolatitle/';
+          this.page.title = 'Java volatitle';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://fenlan1.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1478 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="分类算法,数据挖掘,Elasticsearch," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="fenlan" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/wifi.png?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="分类问题维基百科定义：分类问题是机器学习非常重要的一个组成部分，它的目标是根据已知样本的某些特征，判断一个新的样本属于哪种已知的样本类。分类问题也被称为监督式学习(supervised learning)，根据已知训练区提供的样本，通过计算选择特征参数，建立判别函数以对样本进行的分类。 与之相对的称为非监督式学习(unsupervised learning)，也叫做聚类分析。
+数学定义：已知集合C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="朴素贝叶斯分类算法">
+<meta property="og:url" content="http://fenlan.github.io/2018/11/22/贝叶斯分类算法/index.html">
+<meta property="og:site_name" content="fenlan">
+<meta property="og:description" content="分类问题维基百科定义：分类问题是机器学习非常重要的一个组成部分，它的目标是根据已知样本的某些特征，判断一个新的样本属于哪种已知的样本类。分类问题也被称为监督式学习(supervised learning)，根据已知训练区提供的样本，通过计算选择特征参数，建立判别函数以对样本进行的分类。 与之相对的称为非监督式学习(unsupervised learning)，也叫做聚类分析。
+数学定义：已知集合C">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-15b16ce6d37b616a5443c0f7e42e03ec_hd.png">
+<meta property="og:image" content="http://fenlan.github.io/images/bayes.png">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-a2a73f43adcbb0bf4b9bae19b9495f81_hd.png">
+<meta property="og:updated_time" content="2018-11-24T13:02:02.942Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="朴素贝叶斯分类算法">
+<meta name="twitter:description" content="分类问题维基百科定义：分类问题是机器学习非常重要的一个组成部分，它的目标是根据已知样本的某些特征，判断一个新的样本属于哪种已知的样本类。分类问题也被称为监督式学习(supervised learning)，根据已知训练区提供的样本，通过计算选择特征参数，建立判别函数以对样本进行的分类。 与之相对的称为非监督式学习(unsupervised learning)，也叫做聚类分析。
+数学定义：已知集合C">
+<meta name="twitter:image" content="https://pic1.zhimg.com/80/v2-15b16ce6d37b616a5443c0f7e42e03ec_hd.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://fenlan.github.io/2018/11/22/贝叶斯分类算法/"/>
+
+
+
+
+
+  <title>朴素贝叶斯分类算法 | fenlan</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">fenlan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Everything gonna be fine in the end, if it's not fine, it's not the end.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://fenlan.github.io/2018/11/22/贝叶斯分类算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gao Jie">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fenlan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">朴素贝叶斯分类算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-22T15:18:23+08:00">
+                2018-11-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/22/贝叶斯分类算法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/22/贝叶斯分类算法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="分类问题"><a href="#分类问题" class="headerlink" title="分类问题"></a>分类问题</h2><p>维基百科定义：分类问题是机器学习非常重要的一个组成部分，它的目标是根据已知样本的某些特征，判断一个新的样本属于哪种已知的样本类。分类问题也被称为监督式学习(supervised learning)，根据已知训练区提供的样本，通过计算选择特征参数，建立判别函数以对样本进行的分类。 与之相对的称为非监督式学习(unsupervised learning)，也叫做聚类分析。</p>
+<p>数学定义：已知集合<code>C = {y1,y2,...ym}</code>和<code>I = {x1,x2,...xn}</code>，确定映射规则<code>y = f(x)</code>，使得任意<code>xi ∈ I</code>有且仅有一个<code>yi ∈ C</code> ,使得<code>yi ∈ f(xi)</code>成立。</p>
+<p>在用户画像、NLP、预测、推荐等领域都需要研究分类问题。诸如NLP中情感分析，需要通过分类算法来分析文本的情感极性，这对于舆论监督有很好的帮助。</p>
+<a id="more"></a>
+<h2 id="朴素贝叶斯分类算法综述"><a href="#朴素贝叶斯分类算法综述" class="headerlink" title="朴素贝叶斯分类算法综述"></a>朴素贝叶斯分类算法综述</h2><p>贝叶斯分类算法是一类算法的总称，这类算法都是以贝叶斯定理为基础，故统称贝叶斯分类算法。其中朴素贝叶斯分类算法是贝叶斯分类算法中最简单、最常见的一种分类方法。</p>
+<p>贝叶斯分类算法核心便是概率论中的贝叶斯公式<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">P(B|A) = P(A|B)P(B)/P(A)</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://pic1.zhimg.com/80/v2-15b16ce6d37b616a5443c0f7e42e03ec_hd.png" alt=""><br>其中P(B|A)是指在事件A发生的情况下事件B发生的概率。<br>在贝叶斯定理中，每个名词都有约定俗成的名称：</p>
+<ul>
+<li>P(A|B)是已知B发生后A的条件概率，也由于得自B的取值而被称作A的后验概率。</li>
+<li>P(A)是A的先验概率（或边缘概率）。之所以称为”先验”是因为它不考虑任何B方面的因素。</li>
+<li>P(B|A)是已知A发生后B的条件概率，也由于得自A的取值而被称作B的后验概率。</li>
+<li>P(B)是B的先验概率或边缘概率。</li>
+</ul>
+<p>贝叶斯公式推导:<br><img src="/images/bayes.png" alt=""></p>
+<p>那朴素贝叶斯算法如何使用贝叶斯定理呢？将贝叶斯公式中的变量换成实体可有<br><img src="https://pic2.zhimg.com/80/v2-a2a73f43adcbb0bf4b9bae19b9495f81_hd.png" alt=""></p>
+<h2 id="例子分析"><a href="#例子分析" class="headerlink" title="例子分析"></a>例子分析</h2><p>给定如下苹果数据</p>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>大小</th>
+<th>颜色</th>
+<th>形状</th>
+<th>好吃</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>小</td>
+<td>青色</td>
+<td>非规则</td>
+<td>否</td>
+</tr>
+<tr>
+<td>2</td>
+<td>大</td>
+<td>红色</td>
+<td>非规则</td>
+<td>是</td>
+</tr>
+<tr>
+<td>3</td>
+<td>大</td>
+<td>红色</td>
+<td>圆形</td>
+<td>是</td>
+</tr>
+<tr>
+<td>4</td>
+<td>大</td>
+<td>青色</td>
+<td>圆形</td>
+<td>否</td>
+</tr>
+<tr>
+<td>5</td>
+<td>大</td>
+<td>青色</td>
+<td>非规则</td>
+<td>否</td>
+</tr>
+<tr>
+<td>6</td>
+<td>小</td>
+<td>红色</td>
+<td>圆形</td>
+<td>是</td>
+</tr>
+<tr>
+<td>7</td>
+<td>大</td>
+<td>青色</td>
+<td>非规则</td>
+<td>否</td>
+</tr>
+<tr>
+<td>8</td>
+<td>小</td>
+<td>红色</td>
+<td>非规则</td>
+<td>否</td>
+</tr>
+<tr>
+<td>9</td>
+<td>小</td>
+<td>青色</td>
+<td>圆形</td>
+<td>否</td>
+</tr>
+<tr>
+<td>10</td>
+<td>大</td>
+<td>红色</td>
+<td>圆形</td>
+<td>是</td>
+</tr>
+</tbody>
+</table>
+<p>现在我在超市看见一个苹果又大又红又圆，现在预测好不好吃。那么分析成数学问题就是<code>P(好吃|大、红、圆)</code>与<code>P(不好吃|大、红、圆)</code>谁更大。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">P(好吃|大、红、圆) = P(大、红、圆|好吃)P(好吃) / P(大、红、圆)</span><br><span class="line">                = P(大|好吃)*P(红|好吃)*P(圆|好吃)*P(好吃) / P(大、红、圆)</span><br><span class="line">                = (<span class="number">3</span>/<span class="number">4</span>) * (<span class="number">4</span>/<span class="number">4</span>) * (<span class="number">3</span>/<span class="number">4</span>) * (<span class="number">4</span>/<span class="number">10</span>) / P(大、红、圆)</span><br><span class="line">                = (<span class="number">144</span>/<span class="number">640</span>) / P(大、红、圆)</span><br><span class="line"></span><br><span class="line">P(不好吃|大、红、圆) = P(大、红、圆|不好吃)P(不好吃) / P(大、红、圆)</span><br><span class="line">                  = P(大|不好吃)*P(红|不好吃)*P(圆|不好吃)*P(不好吃) / P(大、红、圆)</span><br><span class="line">                  = (<span class="number">3</span>/<span class="number">6</span>) * (<span class="number">1</span>/<span class="number">6</span>) * (<span class="number">2</span>/<span class="number">6</span>) * (<span class="number">6</span>/<span class="number">10</span>) / P(大、红、圆)</span><br><span class="line">                  = (<span class="number">36</span>/<span class="number">2160</span>) / P(大、红、圆)</span><br></pre></td></tr></table></figure></p>
+<p>所有根据朴素贝叶斯算法计算得到在训练样本中<code>P(好吃|大、红、圆)</code>大于<code>P(不好吃|大、红、圆)</code>，因此做出判断，又大又红又圆的苹果好吃。</p>
+<p>根据上述计算过程可以发现，某个子属性的概率可能为0,例如 P(红|不好吃)可能为零，那么整个概率就为0。为了规避这个问题，在体量较大的样本训练中，为每一个子属性的样本数+1，在结果上的影响不大。</p>
+<h2 id="利用朴素贝叶斯对文本进行简单的情感分析"><a href="#利用朴素贝叶斯对文本进行简单的情感分析" class="headerlink" title="利用朴素贝叶斯对文本进行简单的情感分析"></a>利用朴素贝叶斯对文本进行简单的情感分析</h2><p>在网络环境中充斥着许多文本信息，此次情感分析问题细化到一个真实场景：当一个官方微博帐号发布了一则消息，官方希望能够通过程序自动分析出微博留言的情感與情。</p>
+<h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p>对问题进行分析，在这个问题中，程序需要获取的文本单位为一条留言，通常微博留言文本词量偏小，通常保持在50字以内。因此我们将每一条留言当作一个样本，我们只关心留言内容，对发表留言的时间、用户等属性不考虑，那么如何抽象文本信息属性呢？在留言中存在比较大量无效的停顿词，我们获取文本信息往往从关键的词语上获取，因此我们对文本进行关键词提取，然后组建一个留言的关键词向量，每个关键词都是文本的属性，由此我们就可以构建像上述例子的属性表，同时在训练样本中，我们根据自己的直觉对样本的每一条数据做个情感极性判断，主要的极性判断为消极情感和积极情感，然后利用朴素贝叶斯对测试样本进行分类。具体步骤如下：</p>
+<ul>
+<li>下载微博留言数据</li>
+<li>判断训练样本中每条留言的情感极性,并去除标点符号和特殊符号</li>
+<li>利用HanLP对留言进行关键词提取，最多提取10个关键词</li>
+<li>构建关键词与情感极性的稀疏矩阵(存在留言关键词不及10个的情况)</li>
+<li>对测试样本进行关键词提取，利用贝叶斯公式分别计算两个情感极性的概率</li>
+<li>将测试样本的情感极性归于概率较大的类别</li>
+</ul>
+<h3 id="问题过程示例"><a href="#问题过程示例" class="headerlink" title="问题过程示例"></a>问题过程示例</h3><p>现在挑选皇族电子竞技俱乐部在2018年11月18日下午4点发布的一则微博的评论部分数据<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. 加油加油！！</span><br><span class="line">2. s8打的完全不配赢是真的，整个18年的努力和荣誉也是真的，吹rng牛逼是真的，骂rng辣鸡也是真的。 想再劈头盖脸骂一顿是真的，希望19年可以重拾荣耀也是真的。</span><br><span class="line">3. RNG加油，面对未来的征程，皇族永不言弃。</span><br><span class="line">4. 一次失利不是世界末日，如今深处低谷，冷眼和嘲笑难免，但请记得低头看看胸口的队名，勿言弃，勇前行！S9加油！</span><br><span class="line">5. 假视频终于做好了，配合假语音，加上IG夺冠也把你们从风口浪尖的位置放下来了，是时候出来洗白了。我这一看评论全是rng加油，公关没少花吧？分给你们多少钱？香锅没人挡子弹的事那一段怎么播？语音在哪呢请告诉我？整这么一段花里胡哨的玩意有用？</span><br><span class="line">6. 许少年1999：挨骂就挨骂吧。就好像你是家里最大的希望，高考却连二本都没上。挨骂是应该的，可是谁还不允许你复考了？RNG加油，RNG牛逼！</span><br><span class="line">7. 明年的纪录片要彩色的！要最后大家一起喝彩的！要能让我笑着看完的！！！</span><br></pre></td></tr></table></figure></p>
+<p>对数据进行处理，获取每条留言的关键词，并构建稀疏矩阵</p>
+<table>
+<thead>
+<tr>
+<th>关键词</th>
+<th>关键词</th>
+<th>关键词</th>
+<th>关键词</th>
+<th>关键词</th>
+<th>关键词</th>
+<th>关键词</th>
+<th>关键词</th>
+<th>关键词</th>
+<th>关键词</th>
+<th>情感词性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>加油</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>积极</td>
+</tr>
+<tr>
+<td>努力</td>
+<td>荣誉</td>
+<td>辣鸡</td>
+<td>披头盖脸</td>
+<td>重拾荣耀</td>
+<td>牛逼</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>积极</td>
+</tr>
+<tr>
+<td>加油</td>
+<td>未来</td>
+<td>征程</td>
+<td>皇族</td>
+<td>用不言弃</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>积极</td>
+</tr>
+<tr>
+<td>失利</td>
+<td>世界末日</td>
+<td>深处</td>
+<td>低谷</td>
+<td>冷眼</td>
+<td>嘲笑</td>
+<td>胸口</td>
+<td>队名</td>
+<td>勿言弃</td>
+<td>前行</td>
+<td>积极</td>
+</tr>
+<tr>
+<td>假</td>
+<td>配合</td>
+<td>风口浪尖</td>
+<td>洗白</td>
+<td>加油</td>
+<td>公关</td>
+<td>子弹</td>
+<td>语音</td>
+<td>花里胡哨</td>
+<td></td>
+<td>消极</td>
+</tr>
+<tr>
+<td>挨骂</td>
+<td>希望</td>
+<td>高考</td>
+<td>二本</td>
+<td>不允许</td>
+<td>加油</td>
+<td>牛逼</td>
+<td></td>
+<td></td>
+<td></td>
+<td>积极</td>
+</tr>
+<tr>
+<td>明年</td>
+<td>纪录片</td>
+<td>彩色</td>
+<td>喝彩</td>
+<td>笑</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>积极</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>别问我为什么取的都是积极的。。。。。。我要保持积极!!!</p>
+</blockquote>
+<p>然后对一条留言进行测试<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1. 你们接着打我就接着看！加油！我们等你！ =&gt; [接着打，接着看，加油，等你]</span><br></pre></td></tr></table></figure></p>
+<p>再计算<code>P(积极|接着打、接着看、加油、等你)</code>和<code>P(消极|接着打，接着看，加油，等你)</code>并比较大小得出结论，<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">P(积极|接着打、接着看、加油、等你) = P(接着打、接着看、加油、等你|积极)*P(积极) / P(接着打、接着看、加油、等你)</span><br><span class="line">                              = P(接着打|积极)*P(接着看|积极)*P(加油|积极)*P(等你|积极)*P(积极) / P(接着打、接着看、加油、等你)</span><br><span class="line">                              = [(<span class="number">0</span>+<span class="number">1</span>)/(<span class="number">6</span>)]*[(<span class="number">0</span>+<span class="number">1</span>)/(<span class="number">6</span>)]*(<span class="number">3</span>/<span class="number">6</span>)*[(<span class="number">0</span>+<span class="number">1</span>)/(<span class="number">6</span>)]*(<span class="number">6</span>/<span class="number">7</span>) / P(接着打、接着看、加油、等你)</span><br><span class="line">                              = (<span class="number">18</span>/<span class="number">9072</span>) / P(接着打、接着看、加油、等你)</span><br><span class="line"></span><br><span class="line">P(消极|接着打、接着看、加油、等你) = P(接着打、接着看、加油、等你|消极)*P(消极) / P(接着打、接着看、加油、等你)</span><br><span class="line">                              = P(接着打|消极)*P(接着看|消极)*P(加油|消极)*P(等你|消极)*P(消极) / P(接着打、接着看、加油、等你)</span><br><span class="line">                              = [(<span class="number">0</span>+<span class="number">1</span>)/<span class="number">1</span>]*[(<span class="number">0</span>+<span class="number">1</span>)/<span class="number">1</span>]*(<span class="number">1</span>/<span class="number">1</span>)*[(<span class="number">0</span>+<span class="number">1</span>)/<span class="number">1</span>]*(<span class="number">1</span>/<span class="number">7</span>) / P(接着打、接着看、加油、等你)</span><br><span class="line">                              = (<span class="number">1</span>/<span class="number">7</span>) / P(接着打、接着看、加油、等你)</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>这不是打脸了吗？仔细分析，问题有两个，第一我们选取的样本中消极太少权重太小，单条记录对结果影响太大，因此对训练样本的选取很重要;第二，我们所选择的总样本数量太少，而这样的文本分析应该是基于大数据来分析的</p>
+</blockquote>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ol>
+<li><p>在关键词提取后，仍然发现有诸如[高考，皇族，队名，配合]等词语对情感极性判断没有太大的影响，但会在一段时间高频出现，如果将这些词与真正表示情感的词化作同等权重来计算，也会影响计算结果。</p>
+<blockquote>
+<p>解决办法：构建一个情感词权重词典，通过词典对关键词向量进行二次特征提取，以求获取更加精准的判断效果</p>
+</blockquote>
+</li>
+<li><p>面对大数据文本时人为判断训练样本的情感词极性是一个繁重的活</p>
+<blockquote>
+<p>这是文本分析比较普遍的问题，有效样本越多，算法结果越精准。但是我们可以谨慎选择一个比较合理的基础训练样本，计算未知样本的情感极性，分类结束后，我们将样本加入到训练样本中，迭代式的增加样本数量。为什么说是谨慎的选择呢，从上面的例子可以看到，原本的基础训练样本影响到后面添加进来的样本，如果基础训练样本不合理，随着迭代次数的增加，整个训练样本会越来越不合理。</p>
+</blockquote>
+</li>
+<li><p>在大数据集上的计算困难，利用原始的方式非常困难</p>
+<blockquote>
+<p>利用现有的文本引擎工具<code>Elasticsearch</code>能够很好的解决这个问题。</p>
+</blockquote>
+</li>
+<li><p>在这个问题分析过程中，我们默认了我们使用的HanLP关键词提取能够提取到我们想要的关键词，但事实关键词提取也是一个非常困难的问题，对这类的研究也很复杂，而我们的情感分析的准确度也高度依赖关键词提取效果。</p>
+<blockquote>
+<p>HanLP的分词、关键词提取也高度依赖了背后的分词词典，随着网络信息传播，往往会出现新的词汇，我们需要定时的收集新词汇，添加到HanLP的分词字典中(可以想要这个要求是很合理的，我们在理解网络词汇的时候也是不断学习的，因此没有理由让分词词典一成不变)</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="Elasticsearch"><a href="#Elasticsearch" class="headerlink" title="Elasticsearch"></a>Elasticsearch</h3><p>Elasticsearch是NLP研究过程中非常强大的工具，它类似关系性数据库，拥有数据库(index)，数据库中有表(type)，表上有属性(字段)。但是不同的是Elasticsearch可以为每个字段建立的索引，这个索引不同于mysql的B+树，而是倒排索引，这个索引记录一个字段的所有直，并记录每个值出现在那些记录里里面。在我们使用朴素贝叶斯计算时，想要获取某个条件下的概率，只需要编写简单的查询语句就可以得出结果，而这个搜索引擎可以在PB级数据量上进行秒级查询。</p>
+<p>Elasticsearch索引设计： 提取留言文本关键词，关键词作为一条记录的字段名，字段名的值为情感权值，同时还有一个训练样本的感情极性字段，例如<code>s8打的完全不配赢是真的，整个18年的努力和荣誉也是真的，吹rng牛逼是真的，骂rng辣鸡也是真的。 想再劈头盖脸骂一顿是真的，希望19年可以重拾荣耀也是真的。</code>的存储模式为：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;id:1, 努力:4, 荣誉:2，辣鸡:1/4，披头盖脸:1/2，重拾荣誉:2，牛逼:2，极性:"积极"&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>请注意当一个词语对最后的情感结论是负作用，那么这个词根据情感词典的权值取权值的倒数</p>
+</blockquote>
+<p>对一条测试样本，测试样本如上述步骤进行关键词提取，通过Elasticsearch查询语句获取贝叶斯定理中的概率，计算积极和消极概率得出结论。(得出结论后也可以将新样本加进训练样本)</p>
+<h2 id="朴素贝叶斯分类算法的优缺点"><a href="#朴素贝叶斯分类算法的优缺点" class="headerlink" title="朴素贝叶斯分类算法的优缺点"></a>朴素贝叶斯分类算法的优缺点</h2><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ol>
+<li>对大数量训练和查询时具有较高的速度。即使使用超大规模的训练集，针对每个项目通常也只会有相对较少的特征数，并且对项目的训练和分类也仅仅是特征概率的数学运算而已。</li>
+<li>朴素贝叶斯模型发源于古典数学理论，有稳定的分类效率。</li>
+<li>支持增量式运算。即可以实时的对新增的样本进行训练。</li>
+<li>朴素贝叶斯对结果解释容易理解。</li>
+</ol>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ol>
+<li>由于使用了样本属性独立性的假设，所以如果样本属性有关联时其效果不好。</li>
+<li>理论上，朴素贝叶斯模型与其他分类方法相比具有最小的误差率。但是实际上并非总是如此，这是因为朴素贝叶斯模型给定输出类别的情况下,假设属性之间相互独立，这个假设在实际应用中往往是不成立的，在属性个数比较多或者属性之间相关性较大时，分类效果不好。而在属性相关性较小时，朴素贝叶斯性能最为良好。对于这一点，有半朴素贝叶斯之类的算法通过考虑部分关联性适度改进。</li>
+<li>由于我们是通过先验和数据来决定后验的概率从而决定分类，所以分类决策存在一定的错误率。</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/分类算法/" rel="tag"><i class="fa fa-tag"></i> 分类算法</a>
+          
+            <a href="/tags/数据挖掘/" rel="tag"><i class="fa fa-tag"></i> 数据挖掘</a>
+          
+            <a href="/tags/Elasticsearch/" rel="tag"><i class="fa fa-tag"></i> Elasticsearch</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/12/ZookeeperLeaderElection/" rel="next" title="Zookeeper Leader选举源码解析">
+                <i class="fa fa-chevron-left"></i> Zookeeper Leader选举源码解析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/24/决策树分类算法/" rel="prev" title="决策树分类算法">
+                决策树分类算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Gao Jie" />
+          <p class="site-author-name" itemprop="name">Gao Jie</p>
+           
+              <p class="site-description motion-element" itemprop="description">Everything gonna be fine in the end</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">72</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/fenlan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/fenlan96" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/lan.fen.104" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://github.com/fanzhonghao" title="范中豪" target="_blank">范中豪</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://23.83.230.171" title="bookshop" target="_blank">bookshop</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/fenlan/ChatTool" title="ChatTool" target="_blank">ChatTool</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/fenlan/cloudcourse-web" title="cloudcourse" target="_blank">cloudcourse</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/fenlan/storm-nginx-log" title="nginx实时日志统计" target="_blank">nginx实时日志统计</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#分类问题"><span class="nav-number">1.</span> <span class="nav-text">分类问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#朴素贝叶斯分类算法综述"><span class="nav-number">2.</span> <span class="nav-text">朴素贝叶斯分类算法综述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例子分析"><span class="nav-number">3.</span> <span class="nav-text">例子分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用朴素贝叶斯对文本进行简单的情感分析"><span class="nav-number">4.</span> <span class="nav-text">利用朴素贝叶斯对文本进行简单的情感分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题分析"><span class="nav-number">4.1.</span> <span class="nav-text">问题分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题过程示例"><span class="nav-number">4.2.</span> <span class="nav-text">问题过程示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">4.3.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Elasticsearch"><span class="nav-number">4.4.</span> <span class="nav-text">Elasticsearch</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#朴素贝叶斯分类算法的优缺点"><span class="nav-number">5.</span> <span class="nav-text">朴素贝叶斯分类算法的优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优点"><span class="nav-number">5.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缺点"><span class="nav-number">5.2.</span> <span class="nav-text">缺点</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gao Jie</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://fenlan1.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://fenlan.github.io/2018/11/22/贝叶斯分类算法/';
+          this.page.identifier = '2018/11/22/贝叶斯分类算法/';
+          this.page.title = '朴素贝叶斯分类算法';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://fenlan1.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

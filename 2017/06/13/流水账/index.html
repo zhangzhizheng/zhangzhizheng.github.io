@@ -1,0 +1,715 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android 国创 信仰," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="好久没有更新博客了，有很多原因。一方面，前段时间事情太多，大概花了一个月来写一个android聊天软件来参加，学校的比赛，虽然写好了，也还像个样子，但在最后答辩的时候选择了放弃。因为国创答辩失败了，恰好那个比赛的答辩和国创答辩同时进行的，所有带着沮丧的心情离开了。另一方面，换了一台电脑工作，而我的博客后台在原来的电脑上，我一直想将它迁移到新的电脑上，然而一直没有成功。因此，大概有托更了3个月的博客">
+<meta property="og:type" content="article">
+<meta property="og:title" content="许久没有更新的流水账">
+<meta property="og:url" content="http://fenlan.github.io/2017/06/13/流水账/index.html">
+<meta property="og:site_name" content="fenlan">
+<meta property="og:description" content="好久没有更新博客了，有很多原因。一方面，前段时间事情太多，大概花了一个月来写一个android聊天软件来参加，学校的比赛，虽然写好了，也还像个样子，但在最后答辩的时候选择了放弃。因为国创答辩失败了，恰好那个比赛的答辩和国创答辩同时进行的，所有带着沮丧的心情离开了。另一方面，换了一台电脑工作，而我的博客后台在原来的电脑上，我一直想将它迁移到新的电脑上，然而一直没有成功。因此，大概有托更了3个月的博客">
+<meta property="og:updated_time" content="2016-11-20T08:37:58.593Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="许久没有更新的流水账">
+<meta name="twitter:description" content="好久没有更新博客了，有很多原因。一方面，前段时间事情太多，大概花了一个月来写一个android聊天软件来参加，学校的比赛，虽然写好了，也还像个样子，但在最后答辩的时候选择了放弃。因为国创答辩失败了，恰好那个比赛的答辩和国创答辩同时进行的，所有带着沮丧的心情离开了。另一方面，换了一台电脑工作，而我的博客后台在原来的电脑上，我一直想将它迁移到新的电脑上，然而一直没有成功。因此，大概有托更了3个月的博客">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://fenlan.github.io/2017/06/13/流水账/"/>
+
+
+
+
+
+  <title>许久没有更新的流水账 | fenlan</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">fenlan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Everything gonna be fine in the end, if it's not fine, it's not the end.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://fenlan.github.io/2017/06/13/流水账/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gao Jie">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="fenlan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">许久没有更新的流水账</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-13T20:16:45+08:00">
+                2017-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/06/13/流水账/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/06/13/流水账/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>好久没有更新博客了，有很多原因。一方面，前段时间事情太多，大概花了一个月来写一个android聊天软件来参加，学校的比赛，虽然写好了，也还像个样子，但在最后答辩的时候选择了放弃。因为国创答辩失败了，恰好那个比赛的答辩和国创答辩同时进行的，所有带着沮丧的心情离开了。另一方面，换了一台电脑工作，而我的博客后台在原来的电脑上，我一直想将它迁移到新的电脑上，然而一直没有成功。因此，大概有托更了3个月的博客，现在静下心来总结一下最近的学习。</strong></p>
+<a id="more"></a>
+<h1 id="Android项目经验"><a href="#Android项目经验" class="headerlink" title="Android项目经验"></a>Android项目经验</h1><p><strong>1.Toolbar上实现返回按钮</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">backButton.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">                onBackPressed();    <span class="comment">//实现返回功能</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onBackPressed</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">        <span class="keyword">super</span>.onBackPressed();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>2.listview自定义Adapter</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Chatting_Adapter</span> <span class="keyword">extends</span> <span class="title">BaseAdapter</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> PAGE_MESSAGE_COUNT = <span class="number">30</span>;</span><br><span class="line">    <span class="keyword">public</span>  <span class="keyword">static</span> String USERNAME = <span class="string">"com.example.username"</span>;</span><br><span class="line">    <span class="keyword">public</span>  <span class="keyword">static</span> String MYNAME = <span class="string">"com.example.myname"</span>;</span><br><span class="line">    <span class="keyword">private</span> List&lt;cn.jpush.im.android.api.model.Message&gt; chatting_list;</span><br><span class="line">    <span class="keyword">private</span> LayoutInflater myInflater;</span><br><span class="line">    <span class="keyword">private</span> Context mContext;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mStart;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mOffset = PAGE_MESSAGE_COUNT;</span><br><span class="line">    <span class="keyword">private</span> Conversation mConversation;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Chatting_Adapter</span><span class="params">(Context context, String UserName, List&lt;Message&gt; chatting_list)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.USERNAME = UserName;</span><br><span class="line">        <span class="keyword">this</span>.mContext = context;</span><br><span class="line">        <span class="keyword">this</span>.mStart = mOffset;</span><br><span class="line">        <span class="keyword">this</span>.chatting_list = chatting_list;</span><br><span class="line">        myInflater = LayoutInflater.from(context);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回数据集长度</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> chatting_list.size();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> chatting_list.get(position);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getItemId</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> position;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(List&lt;Message&gt; chatting_list)</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">        <span class="keyword">this</span>.chatting_list = chatting_list;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">getView</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> position, View view, ViewGroup viewGroup)</span> </span>&#123;</span><br><span class="line">        Message message = chatting_list.get(position);</span><br><span class="line">        ViewHolder holder;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(view == <span class="keyword">null</span>) &#123;</span><br><span class="line">            view = myInflater.inflate(R.layout.chat_text_ui, viewGroup, <span class="keyword">false</span>);</span><br><span class="line">            holder = <span class="keyword">new</span> ViewHolder();</span><br><span class="line">            holder.left_layout = (RelativeLayout)view.findViewById(R.id.left_layout);</span><br><span class="line">            holder.friend_username = (TextView)view.findViewById(R.id.left_tv_name);</span><br><span class="line">            holder.friend_head = (ImageView)view.findViewById(R.id.left_iv_portrait);</span><br><span class="line">            holder.left_chatting_message = (TextView)view.findViewById(R.id.left_tv_content);</span><br><span class="line">            holder.left_chatting_time = (TextView)view.findViewById(R.id.left_tv_time);</span><br><span class="line">            holder.right_layout = (RelativeLayout)view.findViewById(R.id.right_layout);</span><br><span class="line">            holder.myname = (TextView)view.findViewById(R.id.right_tv_name);</span><br><span class="line">            holder.my_head = (ImageView)view.findViewById(R.id.right_iv_portrait);</span><br><span class="line">            holder.right_chatting_message = (TextView)view.findViewById(R.id.right_tv_content);</span><br><span class="line">            holder.right_chatting_time = (TextView)view.findViewById(R.id.right_tv_time);</span><br><span class="line"></span><br><span class="line">            view.setTag(holder);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            holder = (ViewHolder)view.getTag();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (message.getFromUser().getUserName() == JMessageClient.getMyInfo().getUserName()) &#123;</span><br><span class="line">            holder.right_layout.setVisibility(View.VISIBLE);</span><br><span class="line">            holder.left_layout.setVisibility(View.GONE);</span><br><span class="line">            holder.myname.setText(message.getFromUser().getUserName());</span><br><span class="line">            <span class="comment">//holder.friend_head.setImageResource(R.mipmap.friend_head);</span></span><br><span class="line">            TimeFormat timeFormat = <span class="keyword">new</span> TimeFormat(mContext, message.getCreateTime());</span><br><span class="line">            holder.right_chatting_time.setText(timeFormat.getTime());</span><br><span class="line">            TextContent textContent = (TextContent) message.getContent();</span><br><span class="line">            holder.right_chatting_message.setText(textContent.getText());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            holder.left_layout.setVisibility(View.VISIBLE);</span><br><span class="line">            holder.right_layout.setVisibility(View.GONE);</span><br><span class="line">            holder.friend_username.setText(message.getFromUser().getUserName());</span><br><span class="line">            <span class="comment">//holder.friend_head.setImageResource(R.mipmap.friend_head);</span></span><br><span class="line">            TimeFormat timeFormat = <span class="keyword">new</span> TimeFormat(mContext,message.getCreateTime());</span><br><span class="line">            holder.left_chatting_time.setText(timeFormat.getTime());</span><br><span class="line">            TextContent textContent = (TextContent) message.getContent();</span><br><span class="line">            holder.left_chatting_message.setText(textContent.getText());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> view;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">incrementStartPosition</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ++mStart;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">clearMsgList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        chatting_list.clear();</span><br><span class="line">        mStart = <span class="number">0</span>;</span><br><span class="line">        notifyDataSetChanged();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Message <span class="title">getLastMsg</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (chatting_list.size() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> chatting_list.get(chatting_list.size() - <span class="number">1</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addMsgToList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        chatting_list.clear();</span><br><span class="line">        mConversation = JMessageClient.getSingleConversation(USERNAME);</span><br><span class="line">        chatting_list = mConversation.getMessagesFromNewest(<span class="number">0</span>,mOffset);</span><br><span class="line">        Collections.reverse(chatting_list);</span><br><span class="line">        <span class="comment">//chatting_list.add(msg);</span></span><br><span class="line">        <span class="comment">//incrementStartPosition();</span></span><br><span class="line">        notifyDataSetChanged();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">ViewHolder</span> </span>&#123;</span><br><span class="line">        RelativeLayout left_layout;</span><br><span class="line">        TextView friend_username;</span><br><span class="line">        TextView left_chatting_message;</span><br><span class="line">        TextView left_chatting_time;</span><br><span class="line">        ImageView friend_head;</span><br><span class="line">        RelativeLayout right_layout;</span><br><span class="line">        TextView myname;</span><br><span class="line">        TextView right_chatting_message;</span><br><span class="line">        TextView right_chatting_time;</span><br><span class="line">        ImageView my_head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>使用自定义Adapter</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">friendListAdapter = <span class="keyword">new</span> FriendListAdapter(Friend_List.<span class="keyword">this</span>, friendlist);</span><br><span class="line">                        Friend_List.setAdapter(friendListAdapter);</span><br></pre></td></tr></table></figure></p>
+<p><strong>3.退出确认Dialog</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">exitActivity</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">new</span> AlertDialog.Builder(<span class="keyword">this</span>).setTitle(<span class="string">"确认退出吗？"</span>)</span><br><span class="line">                .setIcon(android.R.drawable.ic_dialog_info)</span><br><span class="line">                .setPositiveButton(<span class="string">"确定"</span>, <span class="keyword">new</span> DialogInterface.OnClickListener() &#123;</span><br><span class="line"></span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(DialogInterface dialog, <span class="keyword">int</span> which)</span> </span>&#123;</span><br><span class="line">                        <span class="comment">// 点击“确认”后的操作</span></span><br><span class="line">                        JMessageClient.logout();</span><br><span class="line">                        Friend_List.<span class="keyword">this</span>.finish();</span><br><span class="line"></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">                .setNegativeButton(<span class="string">"返回"</span>, <span class="keyword">new</span> DialogInterface.OnClickListener() &#123;</span><br><span class="line"></span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(DialogInterface dialog, <span class="keyword">int</span> which)</span> </span>&#123;</span><br><span class="line">                        <span class="comment">// 点击“返回”后的操作,这里不设置没有任何操作</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;).show();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>4.不结束软件退出</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onKeyDown</span><span class="params">(<span class="keyword">int</span> keyCode, KeyEvent event)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (keyCode == KeyEvent.KEYCODE_BACK) &#123;</span><br><span class="line">            Intent home = <span class="keyword">new</span> Intent(Intent.ACTION_MAIN);</span><br><span class="line">            home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);</span><br><span class="line">            home.addCategory(Intent.CATEGORY_HOME);</span><br><span class="line">            startActivity(home);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.onKeyDown(keyCode, event);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>5.为软件插入启动广告</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LaunchActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        <span class="comment">//加载启动界面</span></span><br><span class="line">        setContentView(R.layout.activity_launch);</span><br><span class="line">                <span class="comment">//当计时结束时，调至主界面</span></span><br><span class="line">        Handler handler = <span class="keyword">new</span> Handler();</span><br><span class="line">        handler.postDelayed(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                startActivity(<span class="keyword">new</span> Intent(LaunchActivity.<span class="keyword">this</span>, MainActivity.class));</span><br><span class="line">                LaunchActivity.<span class="keyword">this</span>.finish();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="number">3000</span>);   <span class="comment">//界面停留时间</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>更多内容在github上</strong></p>
+<h1 id="目前学习进度"><a href="#目前学习进度" class="headerlink" title="目前学习进度"></a>目前学习进度</h1><p><strong>现在已经将之前的电脑作为了服务器，目前正在熟悉网站开发一整套流程。目标是熟悉使用php大法，css和javascript,数据库这个东西讲道理我不想接触，但是没办法，这一关必须得过。虽然有xml，但是xml并不是合理的选择,所以继续学呗。</strong><br><strong>最近在一些新闻上看到android可能有新的发展方向，可能会逐渐走向闭源。怎么说呢，即使google是这样想的，但是这肯定是一个比较漫长的过程，不管怎么说，google不会放弃中国这个市场的，因此也不会拒绝中国的开发人员，因此，学习Android仍然是可行的，最近从图书馆借了一本书，准备系统性的学习一下Android，结束以前的野路子。</strong></p>
+<h1 id="对于国创失败的感悟"><a href="#对于国创失败的感悟" class="headerlink" title="对于国创失败的感悟"></a>对于国创失败的感悟</h1><p><strong>很不幸，我的第一次国创之路失败了，对此做个总结。</strong><br><strong>首先，在找队友的路上，我就走得很不顺。找不到可靠的队友，最后无奈自己来做队长，基本上所有的事情都由我一手独揽。原本准备让一个队友写计划书，然而到了要交计划书的时候他告诉我他没有电脑，写不出来，所以退出。在最后一两天临时找了一个学弟凑人数，然后自己一个人忙着所有的事情。其次，在方向上出现问题。之前一直找不到方向，然后找了一个高中同学聊了半天，决定了一个方向，然而由于我迫切地想要接入小米的接口，使得我计划的整个项目没有创新点，这也成了国创失败的主要原因。归咎下来，主要还是因为我太一意孤行了，之前迫切想要接入小米接口，队友也不好阻止我，就放任我走向一个死胡同。</strong><br><strong>不知道是什么原因，一直没有找到可以一起学习、一起做项目的同伴，在一个人瞎摸索的路上举步维艰，时不时地出现迷茫的情况，不知道自己想要学什么，不知道自己想要做出个什么项目。总是在一个人的路上走走停停。所以，现在真的想寻求一个可靠的同伴一起学习、一起做项目。</strong></p>
+<h3 id="新的信仰"><a href="#新的信仰" class="headerlink" title="新的信仰"></a>新的信仰</h3><p><strong>国创答辩刚刚结束，学院就来了一个讲座，dota女神前来宣讲。讲道理，女神真的很优秀，特别喜欢她信仰的那句话</strong></p>
+<p><strong>：所有事情到最后都将是好的结局，如果不好，那么就不是结局.<br>：Everything gonna be fine in the end,if it’s not fine,it’s not the end.</strong></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android-国创-信仰/" rel="tag"># Android 国创 信仰</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/13/服务器/" rel="next" title="服务器折腾中。。。">
+                <i class="fa fa-chevron-left"></i> 服务器折腾中。。。
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/13/爬虫/" rel="prev" title="再次挖坑">
+                再次挖坑 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Gao Jie" />
+          <p class="site-author-name" itemprop="name">Gao Jie</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">Tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android项目经验"><span class="nav-number">1.</span> <span class="nav-text">Android项目经验</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#目前学习进度"><span class="nav-number">2.</span> <span class="nav-text">目前学习进度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对于国创失败的感悟"><span class="nav-number">3.</span> <span class="nav-text">对于国创失败的感悟</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新的信仰"><span class="nav-number">3.0.1.</span> <span class="nav-text">新的信仰</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gao Jie</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://fenlan1.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://fenlan.github.io/2017/06/13/流水账/';
+          this.page.identifier = '2017/06/13/流水账/';
+          this.page.title = '许久没有更新的流水账';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://fenlan1.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
